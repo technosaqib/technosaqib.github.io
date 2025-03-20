@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         responseDiv.innerHTML = "<p>⏳ Asking AI...</p>"; // Loading message
 
         try {
+            console.log("Sending request to API URL:", API_URL);
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: {
@@ -27,12 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             if (!response.ok) {
-                throw new Error("Server error. Please try again.");
+                throw new Error(`Server error: ${response.statusText}`);
             }
 
             const data = await response.json();
+            console.log("Received data from API:", data);
             responseDiv.innerHTML = `<p><strong>AI Response:</strong> ${data.message}</p>`;
         } catch (error) {
+            console.error("Fetch error:", error); // Log the error to the console
             responseDiv.innerHTML = `<p>Error: ${error.message}</p>`;
         }
     });
