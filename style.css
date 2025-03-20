@@ -1,93 +1,65 @@
-/* General Page Styling */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    animation: fade-in 2s;
 }
 
-/* Main Container */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 .container {
-    width: 90%;
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    margin: 50px auto;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    animation: slide-in 2s;
 }
 
-/* Logo Styling */
-.logo-container {
-    text-align: center;
-    margin-top: 20px;
-}
-.logo-container img {
-    max-width: 200px;
-    height: auto;
+@keyframes slide-in {
+    from { transform: translateY(100px); }
+    to { transform: translateY(0px); }
 }
 
-/* Headings */
 h1 {
-    color: #333;
+    color: #4CAF50;
+    animation: blink 2s infinite;
 }
 
-/* Authentication Buttons */
-#auth button {
-    background-color: #4285F4;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
+@keyframes blink {
+    50% { color: #ffffff; }
 }
 
-#auth button:hover {
-    background-color: #357AE8;
+.button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
 }
 
-#logoutBtn {
-    background-color: #d9534f;
+@keyframes pulse {
+    50% { transform: scale(1.1); }
 }
 
-#logoutBtn:hover {
-    background-color: #c9302c;
+.button:hover {
+    background-color: #3e8e41;
 }
 
-/* User Input and Dropdown */
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+.gameArea {
+    display: none;
+    animation: fade-in 1s;
 }
 
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-/* AI Response Container */
-#responseContainer {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #fff;
-    min-height: 50px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaa;
 }
