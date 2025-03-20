@@ -3,17 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const questionInput = document.getElementById("question");
     const responseDiv = document.getElementById("response");
 
-    // Change this URL to your deployed Render API
+    // Your deployed AI API on Render
     const API_URL = "https://technosaqib-github-io.onrender.com/ask";
 
     form.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        const question = questionInput.value.trim();
+        event.preventDefault(); // Prevent page reload
 
+        const question = questionInput.value.trim();
         if (question === "") {
             responseDiv.innerHTML = "<p>Please enter a question.</p>";
             return;
         }
+
+        responseDiv.innerHTML = "<p>⏳ Asking AI...</p>"; // Loading message
 
         try {
             const response = await fetch(API_URL, {
