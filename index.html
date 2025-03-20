@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technosaqib AI</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technosaqib - AI Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo Section -->
-        <div class="logo-container">
-            <img src="https://i.ibb.co/NngrQSCh/IMG-20250306-145222-789.webp" alt="Technosaqib AI Logo">
-        </div>
 
-        <h1>Technosaqib AI</h1>
+    <header>
+        <img src="https://raw.githubusercontent.com/technosaqib/technosaqib.github.io/main/profile.png" alt="Technosaqib Logo">
+        <h1>Technosaqib - AI Game</h1>
+        <p>Developed by Saqib Sarwar</p>
+    </header>
 
-        <!-- Google Authentication -->
-        <div id="auth">
-            <button id="loginBtn">Login with Google</button>
-            <button id="logoutBtn" style="display: none;">Logout</button>
-            <p id="userInfo"></p>
-        </div>
+    <div class="container">
+        <p class="description">
+            Welcome to Technosaqib! This AI-powered guessing game will try to determine the character you're thinking of.
+            Answer the questions, and let AI make a smart guess!
+        </p>
+        
+        <p class="social-links">
+            🔗 <a href="https://www.instagram.com/technosaqib_" target="_blank">Professional Instagram</a> |  
+            🔗 <a href="https://www.instagram.com/saqib_sarwar003" target="_blank">Personal Instagram</a>
+        </p>
 
-        <!-- AI Model Selection -->
-        <label for="apiSelector">Choose AI Model:</label>
-        <select id="apiSelector">
-            <option value="chatGPT">ChatGPT</option>
-            <option value="huggingFace">Hugging Face</option>
-            <option value="gemini">Gemini</option>
-            <option value="stabilityAI">Stability AI</option>
-            <option value="mistral">Mistral AI</option>
-        </select>
+        <button class="button" onclick="startGame()">Start Game</button>
+        
+        <div id="gameArea" class="gameArea">
+            <p>Is your character fictional?</p>
+            <input type="radio" id="yes" name="fictional" value="yes" onclick="nextQuestion()">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="fictional" value="no" onclick="nextQuestion()">
+            <label for="no">No</label>
+        </div>
+    </div>
 
-        <!-- User Input -->
-        <input type="text" id="userQuery" placeholder="Enter your question...">
-        <button onclick="fetchAIResponse()">Ask AI</button>
+    <footer>
+        <p>© 2025 Technosaqib | Powered by AI</p>
+    </footer>
 
-        <!-- AI Response Output -->
-        <div id="responseContainer"></div>
-    </div>
-
-    <!-- Scripts -->
-    <script type="module" src="firebase-config.js"></script>
-    <script src="api-handler.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
