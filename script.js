@@ -1,56 +1,37 @@
-const apiKeys = {
-    chatGPT: "sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    huggingFace: "hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    gemini: "AIzaSyxxxxxxxxxxxxxxxxxxxxxxxx"
-};
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("ask-form");
+    const questionInput = document.getElementById("question");
+    const responseDiv = document.getElementById("response");
 
-let questions = [
-    { question: "Is your character fictional?", answers: ["yes", "no"], next: ["Is from book?", "Is historical?"] },
-    { question: "Is from book?", answers: ["yes", "no"], next: ["Is hero?", "Is villain?"] },
-    { question: "Is hero?", answers: ["yes", "no"], next: ["Is male?", "Is female?"] },
-    { question: "Is male?", answers: ["yes", "no"], next: ["Does have powers?", "Is normal?"] },
-    { question: "Does have powers?", answers: ["yes", "no"], next: ["Is from Marvel?", "Is from DC?"] }
-];
+    // Change this URL to your deployed Render API
+    const API_URL = "https://technosaqib-github-io.onrender.com/ask";
 
-let currentQuestion = 0;
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const question = questionInput.value.trim();
 
-function startGame() {
-    document.getElementById("gameArea").style.display = "block";
-}
+        if (question === "") {
+            responseDiv.innerHTML = "<p>Please enter a question.</p>";
+            return;
+        }
 
-function nextQuestion() {
-    currentQuestion++;
-    if (currentQuestion >= questions.length) {
-        getAIResponse();
-        return;
-    }
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ question: question }),
+            });
 
-    let nextQ = questions[currentQuestion].question;
-    document.getElementById("gameArea").innerHTML = `
-        <p>${nextQ}</p>
-        <input type='radio' id='yes' name='answer' value='yes' onclick='nextQuestion()'>
-        <label for='yes'>Yes</label>
-        <input type='radio' id='no' name='answer' value='no' onclick='nextQuestion()'>
-        <label for='no'>No</label>
-    `;
-}
+            if (!response.ok) {
+                throw new Error("Server error. Please try again.");
+            }
 
-// AI API Call
-async function getAIResponse() {
-    let input = "Based on the answers given, guess the character:";
-    
-    let url = "https://api.openai.com/v1/chat/completions";
-    let headers = { "Authorization": `Bearer ${apiKeys.chatGPT}`, "Content-Type": "application/json" };
-    let body = JSON.stringify({ model: "gpt-4", messages: [{ role: "user", content: input }], max_tokens: 100 });
-
-    try {
-        let response = await fetch(url, { method: "POST", headers, body });
-        let data = await response.json();
-
-        document.getElementById("gameArea").innerHTML = `
-            <p><strong>AI Guess:</strong> ${data.choices[0]?.message?.content || "No guess available!"}</p>
-        `;
-    } catch (error) {
-        document.getElementById("gameArea").innerHTML = `<p>Error fetching AI response!</p>`;
-    }
-}
+            const data = await response.json();
+            responseDiv.innerHTML = `<p><strong>AI Response:</strong> ${data.message}</p>`;
+        } catch (error) {
+            responseDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+        }
+    });
+});
