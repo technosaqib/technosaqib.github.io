@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technosaqib - AI Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technosaqib - AI Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
 
-    <header>
-        <img src="https://raw.githubusercontent.com/technosaqib/technosaqib.github.io/main/profile.png" alt="Technosaqib Logo">
-        <h1>Technosaqib - AI Game</h1>
-        <p>Developed by Saqib Sarwar</p>
-    </header>
+    <header>
+        <img src="https://raw.githubusercontent.com/technosaqib/technosaqib.github.io/main/profile.png" alt="Technosaqib Logo">
+        <h1>Technosaqib - AI Game</h1>
+        <p>Developed by Saqib Sarwar</p>
+    </header>
 
-    <div class="container">
-        <p class="description">
-            Welcome to Technosaqib! This AI-powered guessing game will try to determine the character you're thinking of.
-            Answer the questions, and let AI make a smart guess!
-        </p>
-        
-        <p class="social-links">
-            🔗 <a href="https://www.instagram.com/technosaqib_" target="_blank">Professional Instagram</a> |  
-            🔗 <a href="https://www.instagram.com/saqib_sarwar003" target="_blank">Personal Instagram</a>
-        </p>
+    <div class="container">
+        <p class="description">
+            Welcome to Technosaqib! This AI-powered guessing game will try to determine the character you're thinking of.
+            Answer the questions, and let AI make a smart guess!
+        </p>
 
-        <button class="button" onclick="startGame()">Start Game</button>
-        
-        <div id="gameArea" class="gameArea">
-            <p>Is your character fictional?</p>
-            <input type="radio" id="yes" name="fictional" value="yes" onclick="nextQuestion()">
-            <label for="yes">Yes</label>
-            <input type="radio" id="no" name="fictional" value="no" onclick="nextQuestion()">
-            <label for="no">No</label>
-        </div>
-    </div>
+        <p class="social-links">
+            🔗 <a href="https://www.instagram.com/technosaqib_" target="_blank">Professional Instagram</a> |  
+            🔗 <a href="https://www.instagram.com/saqib_sarwar003" target="_blank">Personal Instagram</a>
+        </p>
 
-    <footer>
-        <p>© 2025 Technosaqib | Powered by AI</p>
-    </footer>
+        <form id="ask-form">
+            <input type="text" id="question" placeholder="Ask AI..." required>
+            <button type="submit" class="button">Ask</button>
+        </form>
+
+        <div id="response"></div>
+    </div>
+
+    <footer>
+        <p>© 2025 Technosaqib | Powered by AI</p>
+    </footer>
 
 </body>
 </html>
