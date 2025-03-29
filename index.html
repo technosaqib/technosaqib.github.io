@@ -4,53 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .container {
-            max-width: 500px;
-        }
-
-        img {
-            width: 100px;
-            height: 100px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        h2 {
-            margin-top: 10px;
-            font-size: 20px;
-        }
-    </style>
-    <script>
-        async function redirect() {
-            const response = await fetch('links.json');
-            const links = await response.json();
-            const path = window.location.pathname.replace("/", "");
-            window.location.href = links[path] || links["default"];
-        }
-        redirect();
-    </script>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="container">
