@@ -1,65 +1,36 @@
 body {
-    background-color: #121212;
-    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
     font-family: Arial, sans-serif;
     text-align: center;
-    animation: fade-in 2s;
+    animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes fade-in {
+@keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
 .container {
-    width: 80%;
-    margin: auto;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    animation: slide-in 2s;
+    max-width: 500px;
 }
 
-@keyframes slide-in {
-    from { transform: translateY(100px); }
-    to { transform: translateY(0px); }
+img {
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
 }
 
-h1 {
-    color: #4CAF50;
-    animation: blink 2s infinite;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-@keyframes blink {
-    50% { color: #ffffff; }
-}
-
-.button {
-    background-color: #4CAF50;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    50% { transform: scale(1.1); }
-}
-
-.button:hover {
-    background-color: #3e8e41;
-}
-
-.gameArea {
-    display: none;
-    animation: fade-in 1s;
-}
-
-footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #aaa;
+h2 {
+    margin-top: 10px;
+    font-size: 20px;
 }
