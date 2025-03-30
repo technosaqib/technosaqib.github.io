@@ -1,7 +1,9 @@
-async function redirect() {
-    const response = await fetch('links.json');
-    const links = await response.json();
-    const path = window.location.pathname.replace("/", "");
-    window.location.href = links[path] || links["default"];
-}
-redirect();
+fetch('link.json')
+  .then(response => response.json())
+  .then(links => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const requestedLink = urlParams.get('link');
+      if (requestedLink && links[requestedLink]) {
+          window.location.href = links[requestedLink];
+      }
+  });
