@@ -5,43 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TechnoSaqib Bot</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
+      background: linear-gradient(135deg, #e9ecef, #dee2e6);
+      color: #333;
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in-out;
     }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
     header {
-      background-color: #101010;
+      background: rgba(16, 16, 16, 0.8);
+      backdrop-filter: blur(10px);
       color: white;
       display: flex;
       align-items: center;
-      padding: 10px 20px;
+      justify-content: center;
       gap: 15px;
+      padding: 15px 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s ease;
     }
+
+    header:hover {
+      background: rgba(16, 16, 16, 1);
+    }
+
     header img {
-      height: 40px;
-      width: 40px;
+      height: 50px;
+      width: 50px;
       border-radius: 50%;
+      transition: transform 0.3s ease;
     }
+
+    header img:hover {
+      transform: scale(1.1);
+    }
+
     header h1 {
-      font-size: 1.5rem;
-      margin: 0;
+      font-size: 1.8rem;
+      transition: color 0.3s ease;
     }
-    iframe {
+
+    .container {
       flex: 1;
-      border: none;
-      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1.5s ease-in-out;
     }
+
+    iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 80vh;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s ease;
+    }
+
+    iframe:hover {
+      transform: scale(1.01);
+    }
+
     footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #101010;
+      background: rgba(16, 16, 16, 0.8);
+      backdrop-filter: blur(10px);
       color: white;
-      font-size: 14px;
+      text-align: center;
+      padding: 12px;
+      font-size: 15px;
+      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.15);
+      transition: background 0.3s ease;
+    }
+
+    footer:hover {
+      background: rgba(16, 16, 16, 1);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+      iframe {
+        height: 75vh;
+      }
     }
   </style>
 </head>
@@ -52,14 +114,15 @@
     <h1>TechnoSaqib Bot</h1>
   </header>
 
-  <iframe src="https://embed.cody.bot/9ea09cf9-da63-4bd0-8800-9441f239a712"
-          name="codyai"
-          scrolling="no"
-          allowfullscreen>
-  </iframe>
+  <div class="container">
+    <iframe src="https://embed.cody.bot/9ea09cf9-da63-4bd0-8800-9441f239a712"
+            name="codyai"
+            allowfullscreen>
+    </iframe>
+  </div>
 
   <footer>
-    Created by Saqib Sarwar
+    Created by Saqib Sarwar | © 2025 TechnoSaqib
   </footer>
 
 </body>
