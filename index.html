@@ -11,99 +11,89 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e9ecef, #dee2e6);
-      color: #333;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      animation: fadeIn 1s ease-in-out;
+      animation: fadeInBody 1.2s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInBody {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     header {
-      background: rgba(16, 16, 16, 0.8);
+      background: rgba(16, 16, 16, 0.85);
       backdrop-filter: blur(10px);
       color: white;
       display: flex;
       align-items: center;
-      justify-content: center;
+      padding: 15px 25px;
       gap: 15px;
-      padding: 15px 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.4s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease-in-out;
     }
 
     header:hover {
-      background: rgba(16, 16, 16, 1);
+      background: rgba(16, 16, 16, 0.95);
     }
 
     header img {
       height: 50px;
       width: 50px;
       border-radius: 50%;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease-in-out;
     }
 
     header img:hover {
-      transform: scale(1.1);
+      transform: rotate(360deg) scale(1.1);
     }
 
     header h1 {
       font-size: 1.8rem;
-      transition: color 0.3s ease;
+      margin: 0;
+      animation: slideIn 1s ease-out;
     }
 
-    .container {
-      flex: 1;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 1.5s ease-in-out;
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
 
     iframe {
-      width: 100%;
-      max-width: 1000px;
-      height: 80vh;
+      flex: 1;
       border: none;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      transition: transform 0.4s ease;
+      width: 100%;
+      animation: fadeInIframe 1.5s ease-out;
     }
 
-    iframe:hover {
-      transform: scale(1.01);
+    @keyframes fadeInIframe {
+      0% { opacity: 0; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     footer {
-      background: rgba(16, 16, 16, 0.8);
-      backdrop-filter: blur(10px);
-      color: white;
       text-align: center;
       padding: 12px;
-      font-size: 15px;
-      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.15);
-      transition: background 0.3s ease;
-    }
-
-    footer:hover {
-      background: rgba(16, 16, 16, 1);
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.3rem;
-      }
-      iframe {
-        height: 75vh;
-      }
+      background: rgba(16, 16, 16, 0.85);
+      backdrop-filter: blur(6px);
+      color: white;
+      font-size: 14px;
+      box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
@@ -114,15 +104,14 @@
     <h1>TechnoSaqib Bot</h1>
   </header>
 
-  <div class="container">
-    <iframe src="https://embed.cody.bot/9ea09cf9-da63-4bd0-8800-9441f239a712"
-            name="codyai"
-            allowfullscreen>
-    </iframe>
-  </div>
+  <iframe src="https://embed.cody.bot/9ea09cf9-da63-4bd0-8800-9441f239a712"
+          name="codyai"
+          scrolling="no"
+          allowfullscreen>
+  </iframe>
 
   <footer>
-    Created by Saqib Sarwar | © 2025 TechnoSaqib
+    Created by Saqib Sarwar
   </footer>
 
 </body>
