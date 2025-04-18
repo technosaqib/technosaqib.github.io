@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secret Message Vault</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    input, textarea, button { width: 100%; margin: 10px 0; padding: 10px; }
+    .section { border: 1px solid #ccc; padding: 15px; border-radius: 10px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Secret Message Vault</h2>
+
+  <div class="section">
+    <h3>Encrypt Message</h3>
+    <textarea id="secretMessage" placeholder="Type your secret message..."></textarea>
+    <input type="password" id="encryptPassword" placeholder="Set a password" />
+    <button onclick="encryptMessage()">Encrypt</button>
+    <textarea id="encryptedOutput" readonly placeholder="Encrypted message will appear here..."></textarea>
+  </div>
+
+  <div class="section">
+    <h3>Decrypt Message</h3>
+    <textarea id="encryptedInput" placeholder="Paste the encrypted message..."></textarea>
+    <input type="password" id="decryptPassword" placeholder="Enter password" />
+    <button onclick="decryptMessage()">Decrypt</button>
+    <textarea id="decryptedOutput" readonly placeholder="Decrypted message will appear here..."></textarea>
+  </div>
+
+  <script>
+    function encryptMessage() {
+      const message = document.getElementById("secretMessage").value;
+      const password = document.getElementById("encryptPassword").value;
+      if (!message || !password) {
+        alert("Please enter message and password.");
+        return;
+      }
+      const encrypted = CryptoJS.AES.encrypt(message, password).toString();
+      document.getElementById("encryptedOutput").value = encrypted;
+    }
+
+    function decryptMessage() {
+      const encrypted = document.getElementById("encryptedInput").value;
+      const password = document.getElementById("decryptPassword").value;
+      if (!encrypted || !password) {
+        alert("Please enter encrypted message and password.");
+        return;
+      }
+      try {
+        const bytes = CryptoJS.AES.decrypt(encrypted, password);
+        const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+        if (!decrypted) throw new Error("Wrong password or corrupted data.");
+        document.getElementById("decryptedOutput").value = decrypted;
+      } catch (e) {
+        alert("Decryption failed: Wrong password or invalid message.");
+      }
+    }
+  </script>
+</body>
+</html>
