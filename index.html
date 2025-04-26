@@ -41,10 +41,9 @@
     }
     .glow-text {
       color: #ffffff;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
-                   0 0 20px rgba(255, 255, 255, 0.6),
-                   0 0 30px rgba(173, 216, 230, 0.7),
-                   0 0 40px rgba(0, 191, 255, 0.5);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 
+                   0 0 20px rgba(0, 191, 255, 0.7),
+                   0 0 30px rgba(0, 191, 255, 0.5);
     }
   </style>
 </head>
@@ -52,27 +51,27 @@
 
 <!-- HERO SECTION -->
 <section class="flex flex-col items-center justify-center min-h-screen text-center bg-gradient-to-r from-blue-50 to-purple-100 px-4">
-  <div data-aos="fade-down">
+  <div data-aos="fade-down" data-aos-duration="1500">
     <img src="https://github.com/technosaqib/technosaqib.github.io/raw/main/logo.png" alt="Technosaqib Logo" class="w-32 md:w-40 mx-auto mb-6">
   </div>
 
-  <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Welcome to Technosaqib</h1>
+  <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="zoom-in" data-aos-delay="200">Welcome to Technosaqib</h1>
 
-  <p class="text-lg md:text-2xl text-gray-600 max-w-xl" data-aos="fade-up" data-aos-delay="200">
+  <p class="text-lg md:text-2xl text-gray-600 max-w-xl" data-aos="fade-up" data-aos-delay="400">
     🚀 Empowering Dreams Through Technology <br> 💡 Inspiring Young Minds
   </p>
 
-  <a href="https://www.instagram.com/technosaqib_" target="_blank" class="btn-instagram" data-aos="zoom-in" data-aos-delay="400">
+  <a href="https://www.instagram.com/technosaqib_" target="_blank" class="btn-instagram" data-aos="flip-up" data-aos-delay="600">
     Follow on Instagram
   </a>
 </section>
 
-<!-- PARALLAX SECTION with Powerful Animation -->
-<section class="parallax h-[70vh] flex items-center justify-center">
+<!-- PARALLAX SECTION -->
+<section class="parallax h-[80vh] flex items-center justify-center">
   <h2 class="text-4xl md:text-6xl font-extrabold glow-text" 
-      data-aos="zoom-in-up" 
-      data-aos-delay="200"
-      data-aos-duration="1500"
+      data-aos="zoom-out-up" 
+      data-aos-delay="100"
+      data-aos-duration="2000"
       data-aos-easing="ease-out-cubic">
     Innovate. Inspire. Impact.
   </h2>
@@ -91,23 +90,23 @@
   </div>
 </section>
 
-<!-- FEATURE CARDS -->
+<!-- FEATURES GRID -->
 <section class="py-20 bg-gradient-to-r from-blue-100 to-purple-200 px-6">
   <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-3">
-    <!-- Card 1 -->
-    <div class="bg-white rounded-2xl p-8 shadow-xl hover:scale-105 transition-transform duration-300" data-aos="flip-left">
+    <!-- Feature Card 1 -->
+    <div class="bg-white rounded-2xl p-8 shadow-2xl hover:scale-105 transition-transform duration-300" data-aos="flip-left">
       <h3 class="text-2xl font-bold mb-4">Web Development</h3>
       <p class="text-gray-600">Crafting modern, responsive, and user-friendly websites for businesses and individuals.</p>
     </div>
 
-    <!-- Card 2 -->
-    <div class="bg-white rounded-2xl p-8 shadow-xl hover:scale-105 transition-transform duration-300" data-aos="flip-right" data-aos-delay="100">
+    <!-- Feature Card 2 -->
+    <div class="bg-white rounded-2xl p-8 shadow-2xl hover:scale-105 transition-transform duration-300" data-aos="flip-right" data-aos-delay="150">
       <h3 class="text-2xl font-bold mb-4">AI & Automation</h3>
       <p class="text-gray-600">Exploring the power of AI and automation to build smart, scalable solutions.</p>
     </div>
 
-    <!-- Card 3 -->
-    <div class="bg-white rounded-2xl p-8 shadow-xl hover:scale-105 transition-transform duration-300" data-aos="flip-up" data-aos-delay="200">
+    <!-- Feature Card 3 -->
+    <div class="bg-white rounded-2xl p-8 shadow-2xl hover:scale-105 transition-transform duration-300" data-aos="flip-up" data-aos-delay="300">
       <h3 class="text-2xl font-bold mb-4">Tech Education</h3>
       <p class="text-gray-600">Spreading knowledge and helping others start their tech journey through tutorials and resources.</p>
     </div>
@@ -124,31 +123,33 @@
   </div>
 </section>
 
-<!-- CONTACT / CALL TO ACTION -->
+<!-- CTA / Contact -->
 <section class="py-20 bg-gradient-to-r from-purple-100 to-blue-200 px-6">
-  <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Build the Future Together!</h2>
-    <p class="text-md md:text-lg text-gray-700 mb-8">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6" data-aos="zoom-in">Let's Build the Future Together!</h2>
+    <p class="text-md md:text-lg text-gray-700 mb-8" data-aos="fade-down" data-aos-delay="100">
       Connect with me for collaborations, tech discussions, or just a chat about your ideas.
     </p>
-    <a href="https://www.instagram.com/technosaqib_" target="_blank" class="btn-instagram">
+    <a href="https://www.instagram.com/technosaqib_" target="_blank" class="btn-instagram" data-aos="flip-down" data-aos-delay="200">
       Connect on Instagram
     </a>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="text-center py-8 text-gray-600 text-sm bg-white">
+<footer class="text-center py-8 text-gray-600 text-sm bg-white" data-aos="fade-up">
   &copy; 2025 Technosaqib | All rights reserved
 </footer>
 
-<!-- AOS JS -->
+<!-- AOS Animation Script -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init({
     duration: 1200,
-    once: true,
-    mirror: true,  // re-animate on scroll up
+    once: false, // <-- important
+    mirror: true, // <-- important
+    easing: 'ease-in-out',
+    offset: 100,
   });
 </script>
 
