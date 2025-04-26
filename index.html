@@ -1,35 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technosaqib</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        img {
-            width: 200px;
-            margin-top: 50px;
-        }
-        .instagram-link {
-            display: block;
-            margin-top: 20px;
-            font-size: 18px;
-            color: #0077b5;
-            text-decoration: none;
-        }
-        .instagram-link:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technosaqib</title>
 
-    <img src="https://github.com/technosaqib/technosaqib.github.io/raw/main/logo.png" alt="Logo">
-    
-    <a href="https://www.instagram.com/technosaqib_" target="_blank" class="instagram-link">Follow on Instagram</a>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (Animate on Scroll) Library -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8fafc;
+    }
+    .btn-instagram {
+      background-color: #E1306C;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .btn-instagram:hover {
+      background-color: #c1275b;
+      transform: scale(1.05);
+    }
+    .parallax {
+      background-image: url('https://images.unsplash.com/photo-1508923567004-3a6b8004f3d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    .glow-text {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                   0 0 20px rgba(255, 255, 255, 0.6),
+                   0 0 30px rgba(173, 216, 230, 0.7),
+                   0 0 40px rgba(0, 191, 255, 0.5);
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- HERO SECTION -->
+<section class="flex flex-col items-center justify-center min-h-screen text-center bg-gradient-to-r from-blue-50 to-purple-100 px-4">
+  <div data-aos="fade-down">
+    <img src="https://github.com/technosaqib/technosaqib.github.io/raw/main/logo.png" alt="Technosaqib Logo" class="w-32 md:w-40 mx-auto mb-6">
+  </div>
+
+  <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Welcome to Technosaqib</h1>
+
+  <p class="text-lg md:text-2xl text-gray-600 max-w-xl" data-aos="fade-up" data-aos-delay="200">
+    🚀 Empowering Dreams Through Technology <br> 💡 Inspiring Young Minds
+  </p>
+
+  <a href="https://www.instagram.com/technosaqib_" target="_blank" class="btn-instagram" data-aos="zoom-in" data-aos-delay="400">
+    Follow on Instagram
+  </a>
+</section>
+
+<!-- PARALLAX SECTION with Powerful Animation -->
+<section class="parallax h-[70vh] flex items-center justify-center">
+  <h2 class="text-4xl md:text-6xl font-extrabold glow-text" 
+      data-aos="zoom-in-up" 
+      data-aos-delay="200"
+      data-aos-duration="1500"
+      data-aos-easing="ease-out-cubic">
+    Innovate. Inspire. Impact.
+  </h2>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="py-20 px-6 bg-white">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8" data-aos="fade-right">About Technosaqib</h2>
+    <p class="text-gray-700 text-md md:text-lg leading-relaxed" data-aos="fade-left" data-aos-delay="100">
+      Young Tech Enthusiast | Web Developer | Future Entrepreneur  
+      <br><br>
+      Passionate about creating impactful digital experiences and sharing knowledge with aspiring creators.  
+      Building solutions that empower people and transform ideas into reality.
+    </p>
+  </div>
+</section>
+
+<!-- FEATURE CARDS -->
+<section class="py-20 bg-gradient-to-r from-blue-100 to-purple-200 px-6">
+  <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-3">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-2xl p-8 shadow-xl hover:scale-105 transition-transform duration-300" data-aos="flip-left">
+      <h3 class="text-2xl font-bold mb-4">Web Development</h3>
+      <p class="text-gray-600">Crafting modern, responsive, and user-friendly websites for businesses and individuals.</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white rounded-2xl p-8 shadow-xl hover:scale-105 transition-transform duration-300" data-aos="flip-right" data-aos-delay="100">
+      <h3 class="text-2xl font-bold mb-4">AI & Automation</h3>
+      <p class="text-gray-600">Exploring the power of AI and automation to build smart, scalable solutions.</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white rounded-2xl p-8 shadow-xl hover:scale-105 transition-transform duration-300" data-aos="flip-up" data-aos-delay="200">
+      <h3 class="text-2xl font-bold mb-4">Tech Education</h3>
+      <p class="text-gray-600">Spreading knowledge and helping others start their tech journey through tutorials and resources.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE SECTION -->
+<section class="py-20 px-6 bg-white">
+  <div class="max-w-3xl mx-auto text-center">
+    <blockquote class="text-2xl md:text-3xl font-semibold italic text-gray-800" data-aos="fade-up">
+      "The future belongs to those who believe in the beauty of their dreams."
+    </blockquote>
+    <p class="mt-4 text-gray-500" data-aos="fade-up" data-aos-delay="100">- Technosaqib</p>
+  </div>
+</section>
+
+<!-- CONTACT / CALL TO ACTION -->
+<section class="py-20 bg-gradient-to-r from-purple-100 to-blue-200 px-6">
+  <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Build the Future Together!</h2>
+    <p class="text-md md:text-lg text-gray-700 mb-8">
+      Connect with me for collaborations, tech discussions, or just a chat about your ideas.
+    </p>
+    <a href="https://www.instagram.com/technosaqib_" target="_blank" class="btn-instagram">
+      Connect on Instagram
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-8 text-gray-600 text-sm bg-white">
+  &copy; 2025 Technosaqib | All rights reserved
+</footer>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1200,
+    once: true,
+    mirror: true,  // re-animate on scroll up
+  });
+</script>
 
 </body>
 </html>
