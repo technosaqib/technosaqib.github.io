@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://technosaqib.github.io/sitemap.xml
