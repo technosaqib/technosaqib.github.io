@@ -1,3 +1,4 @@
+/* chat.css */
 body {
   font-family: Arial, sans-serif;
   background: #e0f7fa; /* Light cyan background */
@@ -30,11 +31,21 @@ body {
   margin: 30px auto;
   width: 90%;
   max-width: 800px;
+  display: none; /* Initially hidden, shown by JavaScript */
 }
 
 #mainApp h2 {
   color: #4caf50; /* Green heading */
   margin-bottom: 15px;
+}
+
+#myId {
+  font-weight: bold;
+  color: #2196f3; /* Blue color for Room ID */
+}
+
+#connectId {
+  margin-right: 10px;
 }
 
 input, textarea, button {
@@ -73,16 +84,22 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-align: left; /* Align chat messages to the left */
 }
 
 #chat p {
   padding: 8px 0;
   border-bottom: 1px solid #eee;
-  text-align: left;
 }
 
 #chat p:last-child {
   border-bottom: none;
+}
+
+#chat b {
+  color: #795548; /* Brown color for usernames */
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 #video-grid {
