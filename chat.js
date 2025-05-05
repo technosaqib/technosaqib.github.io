@@ -1,5 +1,25 @@
 let peer;
 let connections = [];
+let isConnected = false; // Track connection status
+
+// Function to add an audio stream
+function addAudioStream(stream, userId, mute = false) {
+  const audioGrid = document.getElementById("audio-grid") || document.body; // Default to body if no audio-grid
+  const audio = document.createElement("audio");
+  audio.srcObject = stream;
+  audio.autoplay = true;
+  audio.muted = mute;
+  audio.id = `audio-${userId}`;
+  audioGrid.appendChild(audio);
+}
+
+// Function to remove an audio stream
+function removeAudioStream(userId) {
+  const audio = document.getElementById(`audio-${userId}`);
+  if (audio) {
+    audio.remove();
+  }
+}
 
 function startApp() {
   const name = document.getElementById("nameInput").value.trim();
@@ -21,6 +41,7 @@ function startApp() {
   peer.on("connection", conn => {
     console.log('New connection from:', conn.peer);
     connections.push(conn);
+    updateConnectionStatus(true);
     conn.on("data", msg => {
       document.getElementById("chat").innerHTML += `<p><b>${conn.peer.split('-')[0]}:</b> ${msg}</p>`;
     });
@@ -28,13 +49,21 @@ function startApp() {
     conn.on("close", () => {
       console.log('Connection closed with:', conn.peer);
       connections = connections.filter(c => c !== conn);
-      removeVideoStream(conn.peer); // Clean up video stream if present
+      removeVideoStream(conn.peer);
+      removeAudioStream(conn.peer);
+      if (connections.length === 0) {
+        updateConnectionStatus(false);
+      }
     });
 
     conn.on("error", err => {
       console.error("Connection error:", err);
       connections = connections.filter(c => c !== conn);
-      removeVideoStream(conn.peer); // Clean up video stream if present
+      removeVideoStream(conn.peer);
+      removeAudioStream(conn.peer);
+      if (connections.length === 0) {
+        updateConnectionStatus(false);
+      }
     });
   });
 
@@ -43,10 +72,15 @@ function startApp() {
       .then(stream => {
         call.answer(stream);
         call.on("stream", userStream => {
-          addVideoStream(userStream, call.peer);
+          if (stream.getVideoTracks().length > 0) {
+            addVideoStream(userStream, call.peer);
+          } else if (stream.getAudioTracks().length > 0) {
+            addAudioStream(userStream, call.peer);
+          }
         });
         call.on("close", () => {
           removeVideoStream(call.peer);
+          removeAudioStream(call.peer);
         });
       })
       .catch(err => {
@@ -78,6 +112,7 @@ function connectToUser() {
   conn.on("open", () => {
     console.log('Connected to:', connectId);
     connections.push(conn);
+    updateConnectionStatus(true);
     alert("Connected to " + connectId.split('-')[0]);
   });
 
@@ -88,13 +123,21 @@ function connectToUser() {
   conn.on("close", () => {
     console.log('Connection closed with:', connectId);
     connections = connections.filter(c => c !== conn);
-    removeVideoStream(connectId); // Clean up video stream if present
+    removeVideoStream(connectId);
+    removeAudioStream(connectId);
+    if (connections.length === 0) {
+      updateConnectionStatus(false);
+    }
   });
 
   conn.on("error", err => {
     console.error("Connection error:", err);
     connections = connections.filter(c => c !== conn);
-    removeVideoStream(connectId); // Clean up video stream if present
+    removeVideoStream(connectId);
+    removeAudioStream(connectId);
+    if (connections.length === 0) {
+      updateConnectionStatus(false);
+    }
   });
 }
 
@@ -112,10 +155,10 @@ function startVoiceCall() {
       connections.forEach(c => {
         const call = peer.call(c.peer, stream);
         call.on("stream", userStream => {
-          addVideoStream(userStream, call.peer, true); // Mute local audio for remote stream
+          addAudioStream(userStream, call.peer, true); // Mute local audio for remote stream
         });
         call.on("close", () => {
-          removeVideoStream(call.peer);
+          removeAudioStream(call.peer);
         });
       });
     })
@@ -149,7 +192,7 @@ function addVideoStream(stream, userId, mute = false) {
   video.srcObject = stream;
   video.autoplay = true;
   video.muted = mute;
-  video.id = `video-${userId}`; // Assign an ID to the video element
+  video.id = `video-${userId}`;
   videoGrid.appendChild(video);
 }
 
@@ -157,5 +200,14 @@ function removeVideoStream(userId) {
   const video = document.getElementById(`video-${userId}`);
   if (video) {
     video.remove();
+  }
+}
+
+function updateConnectionStatus(connected) {
+  isConnected = connected;
+  if (connected) {
+    document.body.classList.add('connected');
+  } else {
+    document.body.classList.remove('connected');
   }
 }
