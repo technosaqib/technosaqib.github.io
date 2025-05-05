@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #e0f7fa; /* Light cyan background */
+  color: #333; /* Dark gray text */
+  text-align: center;
+  padding: 20px;
+  margin: 0; /* Reset default body margin */
+}
+
+#login {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  width: 80%;
+  max-width: 400px;
+}
+
+#login h2 {
+  color: #00bcd4; /* Cyan heading */
+  margin-bottom: 20px;
+}
+
+#mainApp {
+  background: #f1f8e9; /* Light green background */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+#mainApp h2 {
+  color: #4caf50; /* Green heading */
+  margin-bottom: 15px;
+}
+
+input, textarea, button {
+  padding: 12px;
+  margin: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s ease; /* Smooth border transition */
+}
+
+input:focus, textarea:focus {
+  border-color: #00bcd4; /* Cyan border on focus */
+  outline: none; /* Remove default focus outline */
+}
+
+button {
+  background-color: #00bcd4; /* Cyan button */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Smooth background and transform */
+}
+
+button:hover {
+  background-color: #0097a7; /* Darker cyan on hover */
+  transform: scale(1.05); /* Slight scale up on hover */
+}
+
+#chat {
+  width: 90%;
+  margin: 20px auto;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#chat p {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+#chat p:last-child {
+  border-bottom: none;
+}
+
+#video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Space between video elements */
+}
+
+video {
+  width: 200px;
+  height: 150px;
+  margin: 5px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out; /* Smooth transform for video */
+}
+
+video:hover {
+  transform: scale(1.03);
+}
