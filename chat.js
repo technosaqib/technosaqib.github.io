@@ -1,4 +1,3 @@
-/* chat.js */
 let peer;
 let connections = [];
 
