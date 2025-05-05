@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private P2P Chat & Call</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #f3f3f3; }
+    #video-grid { display: flex; justify-content: center; margin-top: 20px; }
+    video { width: 300px; margin: 10px; border: 2px solid #555; border-radius: 10px; }
+    input, button { padding: 10px; margin: 5px; }
+    #chat { max-height: 200px; overflow-y: auto; background: #fff; margin: 10px auto; padding: 10px; width: 80%; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Private P2P Chat, Voice & Video</h2>  <div>
+    <input type="text" id="my-id" readonly placeholder="Your ID">
+    <input type="text" id="peer-id" placeholder="Friend's ID">
+    <button onclick="callPeer()">Call</button>
+  </div>  <div>
+    <textarea id="message" placeholder="Type a message"></textarea>
+    <button onclick="sendMessage()">Send</button>
+  </div>  <div id="chat"></div>  <div id="video-grid">
+    <video id="my-video" autoplay muted></video>
+    <video id="friend-video" autoplay></video>
+  </div>  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>  <script>
+    const peer = new Peer();
+    let conn, call;
+
+    peer.on('open', id => {
+      document.getElementById('my-id').value = id;
+    });
+
+    peer.on('connection', connection => {
+      conn = connection;
+      conn.on('data', data => {
+        document.getElementById('chat').innerHTML += `<p><b>Friend:</b> ${data}</p>`;
+      });
+    });
+
+    peer.on('call', incomingCall => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        document.getElementById('my-video').srcObject = stream;
+        incomingCall.answer(stream);
+        incomingCall.on('stream', remoteStream => {
+          document.getElementById('friend-video').srcObject = remoteStream;
+        });
+      });
+    });
+
+    function callPeer() {
+      const id = document.getElementById('peer-id').value;
+      conn = peer.connect(id);
+      conn.on('open', () => {
+        conn.on('data', data => {
+          document.getElementById('chat').innerHTML += `<p><b>Friend:</b> ${data}</p>`;
+        });
+      });
+
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        document.getElementById('my-video').srcObject = stream;
+        call = peer.call(id, stream);
+        call.on('stream', remoteStream => {
+          document.getElementById('friend-video').srcObject = remoteStream;
+        });
+      });
+    }
+
+    function sendMessage() {
+      const msg = document.getElementById('message').value;
+      if (conn && msg.trim() !== '') {
+        conn.send(msg);
+        document.getElementById('chat').innerHTML += `<p><b>You:</b> ${msg}</p>`;
+        document.getElementById('message').value = '';
+      }
+    }
+  </script></body>
+</html>
