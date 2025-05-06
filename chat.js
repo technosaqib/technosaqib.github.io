@@ -1,10 +1,11 @@
 let peer;
 let connections = [];
-let isConnected = false; // Track connection status
+let currentVoiceCall;
+let currentVideoCall;
 
 // Function to add an audio stream
 function addAudioStream(stream, userId, mute = false) {
-  const audioGrid = document.getElementById("audio-grid") || document.body; // Default to body if no audio-grid
+  const audioGrid = document.getElementById("audio-grid") || document.body;
   const audio = document.createElement("audio");
   audio.srcObject = stream;
   audio.autoplay = true;
@@ -41,9 +42,8 @@ function startApp() {
   peer.on("connection", conn => {
     console.log('New connection from:', conn.peer);
     connections.push(conn);
-    updateConnectionStatus(true);
     conn.on("data", msg => {
-      document.getElementById("chat").innerHTML += `<p><b>${conn.peer.split('-')[0]}:</b> ${msg}</p>`;
+      handleData(msg, conn.peer);
     });
 
     conn.on("close", () => {
@@ -51,9 +51,6 @@ function startApp() {
       connections = connections.filter(c => c !== conn);
       removeVideoStream(conn.peer);
       removeAudioStream(conn.peer);
-      if (connections.length === 0) {
-        updateConnectionStatus(false);
-      }
     });
 
     conn.on("error", err => {
@@ -61,9 +58,6 @@ function startApp() {
       connections = connections.filter(c => c !== conn);
       removeVideoStream(conn.peer);
       removeAudioStream(conn.peer);
-      if (connections.length === 0) {
-        updateConnectionStatus(false);
-      }
     });
   });
 
@@ -71,14 +65,29 @@ function startApp() {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
         call.answer(stream);
+        if (stream.getVideoTracks().length > 0) {
+          currentVideoCall = call;
+          document.getElementById('stopVideoBtn').style.display = 'inline-block';
+        } else if (stream.getAudioTracks().length > 0) {
+          currentVoiceCall = call;
+          document.getElementById('stopVoiceBtn').style.display = 'inline-block';
+        }
         call.on("stream", userStream => {
-          if (stream.getVideoTracks().length > 0) {
+          if (userStream.getVideoTracks().length > 0) {
             addVideoStream(userStream, call.peer);
-          } else if (stream.getAudioTracks().length > 0) {
+          } else if (userStream.getAudioTracks().length > 0) {
             addAudioStream(userStream, call.peer);
           }
         });
         call.on("close", () => {
+          if (currentVoiceCall === call) {
+            currentVoiceCall = null;
+            document.getElementById('stopVoiceBtn').style.display = 'none';
+          }
+          if (currentVideoCall === call) {
+            currentVideoCall = null;
+            document.getElementById('stopVideoBtn').style.display = 'none';
+          }
           removeVideoStream(call.peer);
           removeAudioStream(call.peer);
         });
@@ -100,6 +109,21 @@ function copyRoomId() {
     .catch(err => alert("Failed to copy Room ID."));
 }
 
+function shareRoomId() {
+  const id = document.getElementById("myId").innerText;
+  const shareText = `Join my private chat and call: ${id}`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Join Private Chat',
+      text: shareText,
+    })
+    .then(() => console.log('Shared successfully'))
+    .catch((error) => console.log('Sharing failed', error));
+  } else {
+    alert(`You can copy and share this link manually: ${shareText}`);
+  }
+}
+
 function connectToUser() {
   const connectId = document.getElementById("connectId").value.trim();
   if (!connectId) {
@@ -112,12 +136,11 @@ function connectToUser() {
   conn.on("open", () => {
     console.log('Connected to:', connectId);
     connections.push(conn);
-    updateConnectionStatus(true);
     alert("Connected to " + connectId.split('-')[0]);
   });
 
   conn.on("data", msg => {
-    document.getElementById("chat").innerHTML += `<p><b>${conn.peer.split('-')[0]}:</b> ${msg}</p>`;
+    handleData(msg, conn.peer);
   });
 
   conn.on("close", () => {
@@ -125,9 +148,6 @@ function connectToUser() {
     connections = connections.filter(c => c !== conn);
     removeVideoStream(connectId);
     removeAudioStream(connectId);
-    if (connections.length === 0) {
-      updateConnectionStatus(false);
-    }
   });
 
   conn.on("error", err => {
@@ -135,79 +155,29 @@ function connectToUser() {
     connections = connections.filter(c => c !== conn);
     removeVideoStream(connectId);
     removeAudioStream(connectId);
-    if (connections.length === 0) {
-      updateConnectionStatus(false);
-    }
   });
 }
 
 function sendMessage() {
   const msg = document.getElementById("message").value.trim();
   if (!msg) return;
+  const data = { type: 'text', payload: msg };
   document.getElementById("chat").innerHTML += `<p><b>You:</b> ${msg}</p>`;
-  connections.forEach(c => c.send(msg));
+  connections.forEach(c => c.send(data));
   document.getElementById("message").value = "";
 }
 
-function startVoiceCall() {
-  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-    .then(stream => {
-      connections.forEach(c => {
-        const call = peer.call(c.peer, stream);
-        call.on("stream", userStream => {
-          addAudioStream(userStream, call.peer, true); // Mute local audio for remote stream
-        });
-        call.on("close", () => {
-          removeAudioStream(call.peer);
-        });
-      });
-    })
-    .catch(err => {
-      console.error("Failed to get audio stream:", err);
-    });
-}
-
-function startVideoCall() {
-  navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-    .then(stream => {
-      addVideoStream(stream, peer.id, true); // Add local video and mute it
-      connections.forEach(c => {
-        const call = peer.call(c.peer, stream);
-        call.on("stream", userStream => {
-          addVideoStream(userStream, call.peer);
-        });
-        call.on("close", () => {
-          removeVideoStream(call.peer);
-        });
-      });
-    })
-    .catch(err => {
-      console.error("Failed to get media stream:", err);
-    });
-}
-
-function addVideoStream(stream, userId, mute = false) {
-  const videoGrid = document.getElementById("video-grid");
-  const video = document.createElement("video");
-  video.srcObject = stream;
-  video.autoplay = true;
-  video.muted = mute;
-  video.id = `video-${userId}`;
-  videoGrid.appendChild(video);
-}
-
-function removeVideoStream(userId) {
-  const video = document.getElementById(`video-${userId}`);
-  if (video) {
-    video.remove();
+function sendImage() {
+  const file = document.getElementById("imageInput").files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const data = { type: 'image', payload: reader.result };
+      document.getElementById("chat").innerHTML += `<p><b>You (Image):</b> <img src="${reader.result}" style="max-width: 200px;"></p>`;
+      connections.forEach(c => c.send(data));
+    };
+    reader.readAsDataURL(file);
   }
 }
 
-function updateConnectionStatus(connected) {
-  isConnected = connected;
-  if (connected) {
-    document.body.classList.add('connected');
-  } else {
-    document.body.classList.remove('connected');
-  }
-}
+function
