@@ -1,161 +1,122 @@
-let peer;
-let connections = [];
-let currentVoiceCall;
-let currentVideoCall;
-// Function to add an audio stream
-function addAudioStream(stream, userId, mute = false) {
-  const audioGrid = document.getElementById("audio-grid") || document.body;
-  const audio = document.createElement("audio");
-  audio.srcObject = stream;
-  audio.autoplay = true;
-  audio.muted = mute;
-  audio.id = `audio-${userId}`;
-  audioGrid.appendChild(audio);
+let peer, conn, localStream, currentCall;
+
+function agreeTOS() {
+  document.getElementById("tos-popup").style.display = "none";
+  document.getElementById("main-interface").style.display = "block";
 }
-// Function to remove an audio stream
-function removeAudioStream(userId) {
-  const audio = document.getElementById(`audio-${userId}`);
-  if (audio) {
-    audio.remove();
-  }
+
+function disagreeTOS() {
+  window.location.href = "https://google.com";
 }
-function startApp() {
-  const name = document.getElementById("nameInput").value.trim();
-  if (!name) {
-    alert("Enter a name!");
-    return;
-  }
-  document.getElementById("login").style.display = "none";
-  document.getElementById("mainApp").style.display = "block";
-  document.getElementById("userNameDisplay").innerText = name;
-  peer = new Peer(name + "-" + Math.floor(Math.random() * 10000));
-  peer.on("open", id => {
-    document.getElementById("myId").innerText = id;
-  });
-  peer.on("connection", conn => {
-    console.log('New connection from:', conn.peer);
-    connections.push(conn);
-    conn.on("data", msg => {
-      handleData(msg, conn.peer);
-    });
-    conn.on("close", () => {
-      console.log('Connection closed with:', conn.peer);
-      connections = connections.filter(c => c !== conn);
-      removeVideoStream(conn.peer);
-      removeAudioStream(conn.peer);
-    });
-    conn.on("error", err => {
-      console.error("Connection error:", err);
-      connections = connections.filter(c => c !== conn);
-      removeVideoStream(conn.peer);
-      removeAudioStream(conn.peer);
-    });
-  });
-  peer.on("call", call => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then(stream => {
-        call.answer(stream);
-        if (stream.getVideoTracks().length > 0) {
-          currentVideoCall = call;
-          document.getElementById('stopVideoBtn').style.display = 'inline-block';
-        } else if (stream.getAudioTracks().length > 0) {
-          currentVoiceCall = call;
-          document.getElementById('stopVoiceBtn').style.display = 'inline-block';
-        }
-        call.on("stream", userStream => {
-          if (userStream.getVideoTracks().length > 0) {
-            addVideoStream(userStream, call.peer);
-          } else if (userStream.getAudioTracks().length > 0) {
-            addAudioStream(userStream, call.peer);
-          }
-        });
-        call.on("close", () => {
-          if (currentVoiceCall === call) {
-            currentVoiceCall = null;
-            document.getElementById('stopVoiceBtn').style.display = 'none';
-          }
-          if (currentVideoCall === call) {
-            currentVideoCall = null;
-            document.getElementById('stopVideoBtn').style.display = 'none';
-          }
-          removeVideoStream(call.peer);
-          removeAudioStream(call.peer);
-        });
-      })
-      .catch(err => {
-        console.error("Failed to get media stream:", err);
-      });
-  });
-  peer.on("error", err => {
-    console.error("PeerJS error:", err);
-  });
+
+function generateID(name) {
+  const randomNum = Math.floor(1000 + Math.random() * 9000);
+  return `${name.toLowerCase().replace(/\s/g, "")}-${randomNum}`;
 }
-function copyRoomId() {
-  const id = document.getElementById("myId").innerText;
-  navigator.clipboard.writeText(id)
-    .then(() => alert("Room ID copied to clipboard!"))
-    .catch(err => alert("Failed to copy Room ID."));
+
+function registerUser() {
+  const name = document.getElementById("username").value.trim();
+  if (!name) return alert("Enter a name!");
+
+  const userId = generateID(name);
+  peer = new Peer(userId);
+
+  peer.on('open', id => {
+    document.getElementById("my-id").innerText = id;
+    document.getElementById("chat-interface").style.display = "block";
+
+    peer.on('connection', incoming => {
+      conn = incoming;
+      conn.on('data', msg => showMessage("Friend", msg));
+    });
+
+    peer.on('call', call => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+          localStream = stream;
+          currentCall = call;
+          call.answer(stream);
+          call.on('stream', remote => {
+            document.getElementById("remote-video").srcObject = remote;
+            document.getElementById("local-video").srcObject = stream;
+          });
+        });
+    });
+  });
 }
-function shareRoomId() {
-  const id = document.getElementById("myId").innerText;
-  const shareText = `Join my private chat and call: ${id}`;
-  if (navigator.share) {
-    navigator.share({
-      title: 'Join Private Chat',
-      text: shareText,
-    })
-    .then(() => console.log('Shared successfully'))
-    .catch((error) => console.log('Sharing failed', error));
-  } else {
-    alert(`You can copy and share this link manually: ${shareText}`);
-  }
+
+function connect() {
+  const friendId = document.getElementById("friend-id").value.trim();
+  if (!friendId) return alert("Enter your friend's ID!");
+
+  conn = peer.connect(friendId);
+  conn.on('open', () => {
+    conn.on('data', msg => showMessage("Friend", msg));
+  });
 }
-function connectToUser() {
-  const connectId = document.getElementById("connectId").value.trim();
-  if (!connectId) {
-    alert("Enter Room ID to connect");
-    return;
-  }
-  const conn = peer.connect(connectId);
-  conn.on("open", () => {
-    console.log('Connected to:', connectId);
-    connections.push(conn);
-    alert("Connected to " + connectId.split('-')[0]);
-  });
-  conn.on("data", msg => {
-    handleData(msg, conn.peer);
-  });
-  conn.on("close", () => {
-    console.log('Connection closed with:', connectId);
-    connections = connections.filter(c => c !== conn);
-    removeVideoStream(connectId);
-    removeAudioStream(connectId);
-  });
-  conn.on("error", err => {
-    console.error("Connection error:", err);
-    connections = connections.filter(c => c !== conn);
-    removeVideoStream(connectId);
-    removeAudioStream(connectId);
-  });
-}
+
 function sendMessage() {
-  const msg = document.getElementById("message").value.trim();
-  if (!msg) return;
-  const data = { type: 'text', payload: msg };
-  document.getElementById("chat").innerHTML += `<p><b>You:</b> ${msg}</p>`;
-  connections.forEach(c => c.send(data));
-  document.getElementById("message").value = "";
+  const input = document.getElementById("message-input");
+  const msg = input.value.trim();
+  if (!msg || !conn) return;
+
+  conn.send(msg);
+  showMessage("Me", msg);
+  input.value = "";
 }
-function sendImage() {
-  const file = document.getElementById("imageInput").files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const data = { type: 'image', payload: reader.result };
-      document.getElementById("chat").innerHTML += `<p><b>You (Image):</b> <img src="${reader.result}" style="max-width: 200px;"></p>`;
-      connections.forEach(c => c.send(data));
-    };
-    reader.readAsDataURL(file);
-  }
+
+function showMessage(sender, msg) {
+  const div = document.createElement("div");
+  div.textContent = `${sender}: ${msg}`;
+  document.getElementById("messages").appendChild(div);
 }
-function
+
+function copyID() {
+  const id = document.getElementById("my-id").innerText;
+  navigator.clipboard.writeText(id).then(() => alert("Copied!"));
+}
+
+function shareID() {
+  const id = document.getElementById("my-id").innerText;
+  const shareText = `Hey, connect with me on Chat! My ID is: ${id}`;
+  if (navigator.share) {
+    navigator.share({ title: "Chat ID", text: shareText });
+  } else {
+    alert("Sharing not supported. Copy the ID manually.");
+  }
+}
+
+function startVoiceCall() {
+  callPeer(false);
+}
+
+function startVideoCall() {
+  callPeer(true);
+}
+
+function callPeer(videoEnabled) {
+  const friendId = document.getElementById("friend-id").value.trim();
+  if (!friendId) return alert("Enter friend's ID!");
+
+  navigator.mediaDevices.getUserMedia({ video: videoEnabled, audio: true })
+    .then(stream => {
+      localStream = stream;
+      document.getElementById("local-video").srcObject = stream;
+
+      const call = peer.call(friendId, stream);
+      currentCall = call;
+
+      call.on('stream', remote => {
+        document.getElementById("remote-video").srcObject = remote;
+      });
+    });
+}
+
+function stopCall() {
+  if (localStream) {
+    localStream.getTracks().forEach(track => track.stop());
+  }
+  if (currentCall) currentCall.close();
+  document.getElementById("local-video").srcObject = null;
+  document.getElementById("remote-video").srcObject = null;
+}
