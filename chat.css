@@ -1,193 +1,60 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #e0f7fa; /* Light cyan background */
-  color: #333; /* Dark gray text */
-  text-align: center;
-  padding: 20px;
-  margin: 0; /* Reset default body margin */
-  transition: background-color 0.5s ease; /* Smooth background transition */
+  font-family: Arial;
+  padding: 20px;
+  background: #f2f2f2;
+  text-align: center;
 }
-body.connected {
-  background-color: #f0fff0; /* Lighter green when connected */
+
+.popup {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background: white;
+  margin: 50px auto;
+  max-width: 400px;
+  border-radius: 8px;
 }
-#login {
-  background: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 30px auto;
-  width: 80%;
-  max-width: 400px;
-  animation: fadeIn 0.5s ease-out;
+
+input {
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
 }
-#login h2 {
-  color: #00bcd4; /* Cyan heading */
-  margin-bottom: 20px;
-}
-#mainApp {
-  background: #f1f8e9; /* Light green background */
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 30px auto;
-  width: 90%;
-  max-width: 800px;
-  display: none;
-  animation: slideIn 0.5s ease-out;
-}
-#mainApp h2 {
-  color: #4caf50; /* Green heading */
-  margin-bottom: 15px;
-}
-#myId {
-  font-weight: bold;
-  color: #2196f3; /* Blue color for Room ID */
-  margin-right: 5px;
-}
-#mainApp p button {
-  margin-left: 5px;
-  background-color: #64b5f6; /* Light blue for utility buttons */
-}
-#mainApp p button:hover {
-  background-color: #42a5f5;
-}
-#connectId {
-  margin-right: 10px;
-}
-input, textarea, button {
-  padding: 12px;
-  margin: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  transition: border-color 0.3s ease, transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease;
-}
-input:focus, textarea:focus {
-  border-color: #00bcd4; /* Cyan border on focus */
-  outline: none; /* Remove default focus outline */
-}
+
 button {
-  background-color: #00bcd4; /* Cyan button */
-  color: white;
-  cursor: pointer;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
 }
-button:hover {
-  background-color: #0097a7; /* Darker cyan on hover */
-  transform: scale(1.05); /* Slight scale up on hover */
+
+.video-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
-#chat-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  align-items: center; /* Align items vertically in the control bar */
-}
-#chat-controls textarea {
-  flex-grow: 1;
-  resize: vertical; /* Allow vertical resizing of the textarea */
-  min-height: 50px;
-}
-#chat-controls input[type="file"] {
-  display: none; /* Hide the default file input */
-}
-#chat-controls button {
-  padding: 10px 15px; /* Adjust padding for buttons in controls */
-}
-#chat-controls label {
-  background-color: #4caf50; /* Green for image/voice buttons */
-  color: white;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-}
-#chat-controls label:hover {
-  background-color: #43a047;
-  transform: scale(1.03);
-}
-#chat {
-  width: 90%;
-  margin: 20px auto;
-  max-height: 300px;
-  overflow-y: auto;
-  background: #fff;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  text-align: left; /* Align chat messages to the left */
-}
-#chat p {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-  animation: newMessage 0.4s ease-in-out;
-  word-break: break-word; /* Prevent long words from breaking layout */
-}
-#chat p:last-child {
-  border-bottom: none;
-}
-#chat b {
-  color: #795548; /* Brown color for usernames */
-  font-weight: bold;
-  margin-right: 5px;
-}
-#chat img {
-  max-width: 80%;
-  height: auto;
-  border-radius: 4px;
-  margin-top: 5px;
-}
-#chat audio {
-  margin-top: 5px;
-}
-#video-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 10px; /* Space between video elements */
-}
+
 video {
-  width: 200px;
-  height: 150px;
-  margin: 5px;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out; /* Smooth transform for video */
+  width: 300px;
+  height: 200px;
+  background: #000;
+  border-radius: 10px;
 }
-video:hover {
-  transform: scale(1.03);
+
+.controls {
+  margin-top: 10px;
 }
-#call-controls {
-  margin-top: 20px;
+
+.chat-box {
+  margin-top: 20px;
 }
-#call-controls button {
-  padding: 10px 15px;
-  margin-right: 10px;
-  background-color: #f44336; /* Red for stop buttons */
-  color: white;
-}
-#call-controls button:hover {
-  background-color: #d32f2f;
-}
-#call-controls button:first-child,
-#call-controls button:nth-child(3) {
-  background-color: #2196f3; /* Blue for start call buttons */
-}
-#call-controls button:first-child:hover,
-#call-controls button:nth-child(3):hover {
-  background-color: #1976d2;
-}
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes slideIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-@keyframes newMessage {
-  from { opacity: 0.7; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+
+#messages {
+  border: 1px solid #ccc;
+  height: 100px;
+  overflow-y: auto;
+  margin: 10px auto;
+  padding: 10px;
+  background: #fff;
+  width: 80%;
 }
