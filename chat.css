@@ -48,6 +48,16 @@ body.connected {
 #myId {
   font-weight: bold;
   color: #2196f3; /* Blue color for Room ID */
+  margin-right: 5px;
+}
+
+#mainApp p button {
+  margin-left: 5px;
+  background-color: #64b5f6; /* Light blue for utility buttons */
+}
+
+#mainApp p button:hover {
+  background-color: #42a5f5;
 }
 
 #connectId {
@@ -60,7 +70,7 @@ input, textarea, button {
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 16px;
-  transition: border-color 0.3s ease; /* Smooth border transition */
+  transition: border-color 0.3s ease, transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease;
 }
 
 input:focus, textarea:focus {
@@ -72,12 +82,46 @@ button {
   background-color: #00bcd4; /* Cyan button */
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Smooth background and transform */
 }
 
 button:hover {
   background-color: #0097a7; /* Darker cyan on hover */
   transform: scale(1.05); /* Slight scale up on hover */
+}
+
+#chat-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center; /* Align items vertically in the control bar */
+}
+
+#chat-controls textarea {
+  flex-grow: 1;
+  resize: vertical; /* Allow vertical resizing of the textarea */
+  min-height: 50px;
+}
+
+#chat-controls input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+#chat-controls button {
+  padding: 10px 15px; /* Adjust padding for buttons in controls */
+}
+
+#chat-controls label {
+  background-color: #4caf50; /* Green for image/voice buttons */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+#chat-controls label:hover {
+  background-color: #43a047;
+  transform: scale(1.03);
 }
 
 #chat {
@@ -97,6 +141,7 @@ button:hover {
   padding: 8px 0;
   border-bottom: 1px solid #eee;
   animation: newMessage 0.4s ease-in-out;
+  word-break: break-word; /* Prevent long words from breaking layout */
 }
 
 #chat p:last-child {
@@ -107,6 +152,17 @@ button:hover {
   color: #795548; /* Brown color for usernames */
   font-weight: bold;
   margin-right: 5px;
+}
+
+#chat img {
+  max-width: 80%;
+  height: auto;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+#chat audio {
+  margin-top: 5px;
 }
 
 #video-grid {
@@ -129,6 +185,31 @@ video {
 
 video:hover {
   transform: scale(1.03);
+}
+
+#call-controls {
+  margin-top: 20px;
+}
+
+#call-controls button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  background-color: #f44336; /* Red for stop buttons */
+  color: white;
+}
+
+#call-controls button:hover {
+  background-color: #d32f2f;
+}
+
+#call-controls button:first-child,
+#call-controls button:nth-child(3) {
+  background-color: #2196f3; /* Blue for start call buttons */
+}
+
+#call-controls button:first-child:hover,
+#call-controls button:nth-child(3):hover {
+  background-color: #1976d2;
 }
 
 /* Animations */
