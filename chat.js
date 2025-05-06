@@ -1,5 +1,11 @@
 let peer, conn, localStream, currentCall;
 
+// OPTIONAL: Ping the backend API just to check if it's live (you can remove this if not needed)
+fetch('https://technosaqib-api.onrender.com')
+  .then(res => res.json())
+  .then(data => console.log("API Online:", data.message || data))
+  .catch(err => console.error("API Offline or Error:", err));
+
 function agreeTOS() {
   document.getElementById("tos-popup").style.display = "none";
   document.getElementById("main-interface").style.display = "block";
