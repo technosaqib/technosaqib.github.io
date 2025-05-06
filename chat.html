@@ -16,17 +16,31 @@
     <h2>Welcome, <span id="userNameDisplay"></span></h2>
     <p>Your Room ID: <span id="myId"></span>
       <button onclick="copyRoomId()">Copy</button>
+      <button onclick="shareRoomId()">Share</button>
     </p>
-    <textarea id="message" placeholder="Type a message..."></textarea>
-    <button onclick="sendMessage()">Send</button>
+
+    <div id="chat-controls">
+      <textarea id="message" placeholder="Type a message..."></textarea>
+      <button onclick="sendMessage()">Send</button>
+      <input type="file" id="imageInput" accept="image/*" onchange="sendImage()">
+      <button>Send Image</button> <input type="file" id="voiceInput" accept="audio/*" onchange="sendVoiceMessage()">
+      <button>Send Voice</button> </div>
+
     <div id="chat"></div>
     <br>
     <input type="text" id="connectId" placeholder="Other user's Room ID">
     <button onclick="connectToUser()">Connect</button>
-    <button onclick="startVoiceCall()">Voice Call</button>
-    <button onclick="startVideoCall()">Video Call</button>
+
+    <div id="call-controls">
+      <button id="startVoiceBtn" onclick="startVoiceCall()">Voice Call</button>
+      <button id="stopVoiceBtn" onclick="stopVoiceCall()" style="display:none;">Stop Voice</button>
+      <button id="startVideoBtn" onclick="startVideoCall()">Video Call</button>
+      <button id="stopVideoBtn" onclick="stopVideoCall()" style="display:none;">Stop Video</button>
+    </div>
+
     <div id="video-grid"></div>
-    <div id="audio-grid" style="display: none;"></div> </div>
+    <div id="audio-grid" style="display: none;"></div>
+  </div>
 
   <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
   <script src="chat.js"></script>
