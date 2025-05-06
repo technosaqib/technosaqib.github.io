@@ -1,48 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Private Group Chat & Call</title>
-  <link rel="stylesheet" href="chat.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Chat Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="login">
-    <h2>Enter Your Name</h2>
-    <input type="text" id="nameInput" placeholder="Your name">
-    <button onclick="startApp()">Start</button>
-  </div>
 
-  <div id="mainApp" style="display:none;">
-    <h2>Welcome, <span id="userNameDisplay"></span></h2>
-    <p>Your Room ID: <span id="myId"></span>
-      <button onclick="copyRoomId()">Copy</button>
-      <button onclick="shareRoomId()">Share</button>
-    </p>
-
-    <div id="chat-controls">
-      <textarea id="message" placeholder="Type a message..."></textarea>
-      <button onclick="sendMessage()">Send</button>
-      <input type="file" id="imageInput" accept="image/*" onchange="sendImage()">
-      <button>Send Image</button> <input type="file" id="voiceInput" accept="audio/*" onchange="sendVoiceMessage()">
-      <button>Send Voice</button> </div>
-
-    <div id="chat"></div>
-    <br>
-    <input type="text" id="connectId" placeholder="Other user's Room ID">
-    <button onclick="connectToUser()">Connect</button>
-
-    <div id="call-controls">
-      <button id="startVoiceBtn" onclick="startVoiceCall()">Voice Call</button>
-      <button id="stopVoiceBtn" onclick="stopVoiceCall()" style="display:none;">Stop Voice</button>
-      <button id="startVideoBtn" onclick="startVideoCall()">Video Call</button>
-      <button id="stopVideoBtn" onclick="stopVideoCall()" style="display:none;">Stop Video</button>
+    <div id="agreement-overlay">
+        <div id="agreement-box">
+            <div id="agreement-text">
+                <p>Please read and agree to our <a href="https://technosaqib.github.io/chat(terms-of-service).txt" target="_blank">Terms of Service</a> and <a href="https://technosaqib.github.io/chat(privacy-policy).txt" target="_blank">Privacy Policy</a> before using this website.</p>
+            </div>
+            <div id="agreement-links">
+                <a href="https://technosaqib.github.io/chat(privacy-policy).txt" target="_blank">View Privacy Policy</a>
+                <span>|</span>
+                <a href="https://technosaqib.github.io/chat(terms-of-service).txt" target="_blank">View Terms of Service</a>
+            </div>
+            <div id="agreement-buttons">
+                <button id="agree-btn">I Agree</button>
+                <button id="disagree-btn">I Disagree</button>
+            </div>
+        </div>
     </div>
 
-    <div id="video-grid"></div>
-    <div id="audio-grid" style="display: none;"></div>
-  </div>
+    <div id="website-content" class="hidden">
+        <h1>Welcome to the Chat!</h1>
+        <p>This is where your amazing chat interface will be displayed and function.</p>
+        </div>
 
-  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-  <script src="chat.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
