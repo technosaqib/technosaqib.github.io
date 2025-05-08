@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TechnoSaqib Chat</title>
+  <!-- Include PeerJS library -->
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -173,8 +175,8 @@
     <div class="modal-content">
       <h2>Please read and agree to our</h2>
       <div class="links">
-        <a href="https://technosaqib.github.io/chat(terms-of-service).txt">Terms of Service</a> and
-        <a href="https://technosaqib.github.io/chat(privacy-policy).txt">Privacy Policy</a>
+        <a href="https://technosaqib.github.io/chat(terms-of-service).txt" target="_blank">Terms of Service</a> and
+        <a href="https://technosaqib.github.io/chat(privacy-policy).txt" target="_blank">Privacy Policy</a>
       </div>
       <p>before using this website.</p>
       <div class="video-container">
@@ -221,15 +223,35 @@
   <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      console.log('Document loaded, checking PeerJS...');
+      
+      // Check if PeerJS is loaded
+      if (typeof Peer === 'function') {
+        console.log('PeerJS library loaded successfully!');
+      } else {
+        console.error('PeerJS library not loaded properly!');
+      }
+      
+      // DOM Elements
       const tosModal = document.getElementById('tosModal');
       const chatInterface = document.getElementById('chatInterface');
       const registrationScreen = document.getElementById('registrationScreen');
       const chatMainScreen = document.getElementById('chatMainScreen');
       const messagesArea = document.getElementById('messages-area');
-
+      const localVideo = document.getElementById('localVideo');
+      const remoteVideo = document.getElementById('remoteVideo');
+      
+      // Global variables
+      let peer = null;
+      let conn = null;
+      let currentCall = null;
+      let localStream = null;
+      let username = '';
+      
       // Check if Web Share API is supported
       const isWebShareSupported = navigator.share !== undefined;
 
+      // Terms of Service handlers
       document.getElementById('agree').addEventListener('click', function () {
         tosModal.style.display = 'none';
         chatInterface.style.display = 'block';
@@ -239,21 +261,171 @@
         window.location.href = 'https://google.com';
       });
 
+      // Registration handler
       document.getElementById('start').addEventListener('click', function () {
-        const username = document.getElementById('username').value;
+        username = document.getElementById('username').value.trim();
         if (!username) {
           alert('Please enter your name');
           return;
         }
+        
+        // Initialize PeerJS
+        initializePeer(username);
+        
+        // Show chat screen
         registrationScreen.style.display = 'none';
         chatMainScreen.style.display = 'block';
-        document.getElementById('myId').textContent = username;
-        addMessage('info', 'Connected as ' + username);
       });
 
-      // Copy button event listener
+      // Initialize PeerJS
+      function initializePeer(userId) {
+        try {
+          // Create a new Peer with the provided ID
+          peer = new Peer(userId, {
+            debug: 2
+          });
+          
+          // Set up event handlers
+          peer.on('open', function(id) {
+            document.getElementById('myId').textContent = id;
+            addMessage('info', 'Connected as ' + id);
+            console.log('My peer ID is: ' + id);
+          });
+          
+          peer.on('connection', function(connection) {
+            // Handle incoming connection
+            conn = connection;
+            addMessage('info', 'Connected to ' + conn.peer);
+            
+            // Set up connection event handlers
+            setupConnectionHandlers(conn);
+          });
+          
+          peer.on('call', function(call) {
+            addMessage('info', 'Incoming call from ' + call.peer);
+            
+            // Answer the call automatically with your local stream
+            // (or if no stream, just answer with null)
+            if (confirm('Accept call from ' + call.peer + '?')) {
+              navigator.mediaDevices.getUserMedia({audio: true, video: true})
+                .then(function(stream) {
+                  localStream = stream;
+                  localVideo.srcObject = stream;
+                  call.answer(stream);
+                  currentCall = call;
+                  
+                  // Handle stream from the caller
+                  call.on('stream', function(remoteStream) {
+                    remoteVideo.srcObject = remoteStream;
+                  });
+                })
+                .catch(function(err) {
+                  console.error('Failed to get local stream', err);
+                  // Can still answer without a stream
+                  call.answer();
+                  currentCall = call;
+                });
+                
+              call.on('close', function() {
+                addMessage('info', 'Call ended');
+                remoteVideo.srcObject = null;
+              });
+            }
+          });
+          
+          peer.on('error', function(err) {
+            console.error('Peer error:', err);
+            addMessage('info', 'Error: ' + err.type);
+          });
+          
+        } catch (error) {
+          console.error('Failed to initialize peer:', error);
+          addMessage('info', 'Failed to initialize: ' + error.message);
+        }
+      }
+      
+      // Set up connection handlers
+      function setupConnectionHandlers(connection) {
+        connection.on('data', function(data) {
+          // Handle incoming data (messages)
+          addMessage('friend', data);
+        });
+        
+        connection.on('close', function() {
+          addMessage('info', 'Connection closed');
+          conn = null;
+        });
+        
+        connection.on('error', function(err) {
+          console.error('Connection error:', err);
+          addMessage('info', 'Connection error');
+        });
+      }
+
+      // Connect to peer
+      document.getElementById('connect').addEventListener('click', function () {
+        const friendId = document.getElementById('friendId').value.trim();
+        if (!friendId) {
+          alert('Please enter a friend ID');
+          return;
+        }
+        
+        if (!peer) {
+          alert('You are not connected to the network');
+          return;
+        }
+        
+        try {
+          // Create connection to the remote peer
+          conn = peer.connect(friendId);
+          
+          conn.on('open', function() {
+            addMessage('info', 'Connected to ' + conn.peer);
+            setupConnectionHandlers(conn);
+          });
+          
+        } catch (error) {
+          console.error('Connection error:', error);
+          addMessage('info', 'Failed to connect: ' + error.message);
+        }
+      });
+
+      // Send message
+      document.getElementById('send').addEventListener('click', sendMessage);
+      document.getElementById('messageInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') sendMessage();
+      });
+
+      function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value.trim();
+        
+        if (!message) return;
+        
+        if (conn && conn.open) {
+          // Send the message
+          conn.send(message);
+          addMessage('me', message);
+          messageInput.value = '';
+        } else {
+          alert('Not connected to anyone');
+        }
+      }
+
+      // Add message to chat
+      function addMessage(type, text) {
+        const message = document.createElement('div');
+        message.classList.add('message', type);
+        message.textContent = text;
+        messagesArea.appendChild(message);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+      }
+
+      // Copy ID button
       document.getElementById('copy').addEventListener('click', function() {
         const myId = document.getElementById('myId').textContent;
+        if (!myId) return;
+        
         const tempInput = document.createElement('input');
         document.body.appendChild(tempInput);
         tempInput.value = myId;
@@ -263,9 +435,11 @@
         alert('ID copied to clipboard!');
       });
 
-      // Share button event listener
+      // Share ID button
       document.getElementById('share').addEventListener('click', function() {
         const myId = document.getElementById('myId').textContent;
+        if (!myId) return;
+        
         const shareText = `Connect with me on TechnoSaqib Chat! My ID is: ${myId}`;
         
         if (isWebShareSupported) {
@@ -275,65 +449,89 @@
           })
           .catch(error => {
             console.error('Error sharing:', error);
-            // Fallback if sharing fails
             alert('Share your ID: ' + myId);
           });
         } else {
-          // Fallback for browsers that don't support Web Share API
           alert('Share your ID: ' + myId);
         }
       });
 
-      document.getElementById('send').addEventListener('click', sendMessage);
-      document.getElementById('messageInput').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') sendMessage();
-      });
-
-      function sendMessage() {
-        const messageInput = document.getElementById('messageInput');
-        const message = messageInput.value.trim();
-        if (message) {
-          addMessage('me', message);
-          messageInput.value = '';
-        }
-      }
-
-      function addMessage(type, text) {
-        const message = document.createElement('div');
-        message.classList.add('message', type);
-        message.textContent = text;
-        messagesArea.appendChild(message);
-        messagesArea.scrollTop = messagesArea.scrollHeight;
-      }
-
-      document.getElementById('connect').addEventListener('click', function () {
-        const friendId = document.getElementById('friendId').value;
-        if (friendId) {
-          addMessage('info', 'Connected to ' + friendId);
-        } else {
-          alert('Please enter a friend ID');
-        }
-      });
-
+      // Voice call
       document.getElementById('voiceCall').addEventListener('click', function () {
-        const friendId = document.getElementById('friendId').value;
-        if (friendId) {
-          addMessage('info', 'Voice call started');
-        } else {
-          alert('Please enter a friend ID');
-        }
+        startCall(false);
       });
 
+      // Video call
       document.getElementById('videoCall').addEventListener('click', function () {
-        const friendId = document.getElementById('friendId').value;
-        if (friendId) {
-          addMessage('info', 'Video call started');
-        } else {
-          alert('Please enter a friend ID');
-        }
+        startCall(true);
       });
 
+      // Start call function
+      function startCall(withVideo) {
+        const friendId = document.getElementById('friendId').value.trim();
+        if (!friendId) {
+          alert('Please enter a friend ID');
+          return;
+        }
+        
+        if (!peer) {
+          alert('You are not connected to the network');
+          return;
+        }
+        
+        // Get local media stream
+        navigator.mediaDevices.getUserMedia({
+          audio: true,
+          video: withVideo
+        })
+        .then(function(stream) {
+          // Save local stream
+          localStream = stream;
+          
+          // Display local video
+          localVideo.srcObject = stream;
+          
+          // Call the peer
+          const call = peer.call(friendId, stream);
+          currentCall = call;
+          
+          call.on('stream', function(remoteStream) {
+            // Display remote video
+            remoteVideo.srcObject = remoteStream;
+          });
+          
+          call.on('close', function() {
+            addMessage('info', 'Call ended');
+            remoteVideo.srcObject = null;
+          });
+          
+          call.on('error', function(err) {
+            console.error('Call error:', err);
+            addMessage('info', 'Call error: ' + err);
+          });
+          
+          addMessage('info', (withVideo ? 'Video' : 'Voice') + ' call started');
+        })
+        .catch(function(err) {
+          console.error('Failed to get local stream', err);
+          addMessage('info', 'Failed to start call: ' + err.message);
+        });
+      }
+
+      // Stop call
       document.getElementById('stopCall').addEventListener('click', function () {
+        if (currentCall) {
+          currentCall.close();
+          currentCall = null;
+        }
+        
+        if (localStream) {
+          localStream.getTracks().forEach(track => track.stop());
+          localStream = null;
+          localVideo.srcObject = null;
+        }
+        
+        remoteVideo.srcObject = null;
         addMessage('info', 'Call ended');
       });
     });
