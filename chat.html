@@ -1,63 +1,74 @@
-<!-- Terms of Service Modal -->
-<div id="tosModal">
-  <div class="modal-content">
-    <h2>Please read and agree to our</h2>
-    <div class="links">
-      <a href="#">Terms of Service</a> and
-      <a href="#">Privacy Policy</a>
-    </div>
-    <p>before using this website.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Interface</title>
+  <link rel="stylesheet" href="chat.css"> <!-- Link to CSS -->
+</head>
+<body>
 
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/NTMp05LyhC0" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen></iframe>
-    </div>
+  <!-- Your existing HTML code starts here -->
+  <!-- Terms of Service Modal -->
+  <div id="tosModal">
+    <div class="modal-content">
+      <h2>Please read and agree to our</h2>
+      <div class="links">
+        <a href="#">Terms of Service</a> and
+        <a href="#">Privacy Policy</a>
+      </div>
+      <p>before using this website.</p>
 
-    <div class="button-container">
-      <button id="agree">I Agree</button>
-      <button id="disagree">I Disagree</button>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/NTMp05LyhC0" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="button-container">
+        <button id="agree">I Agree</button>
+        <button id="disagree">I Disagree</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Chat Interface -->
-<div id="chatInterface" class="hidden">
-  <h2>Welcome to Chat!</h2>
+  <!-- Chat Interface -->
+  <div id="chatInterface" class="hidden">
+    <h2>Welcome to Chat!</h2>
 
-  <!-- Registration Screen -->
-  <div id="registrationScreen">
-    <input type="text" id="username" placeholder="Enter your name">
-    <button id="start">Start</button>
+    <!-- Registration Screen -->
+    <div id="registrationScreen">
+      <input type="text" id="username" placeholder="Enter your name">
+      <button id="start">Start</button>
+    </div>
+
+    <!-- Main Chat Screen -->
+    <div id="chatMainScreen" class="hidden">
+      <p>Your ID: <span id="myId"></span>
+        <button id="copy">Copy</button>
+        <button id="share">Share</button>
+      </p>
+
+      <input type="text" id="friendId" placeholder="Enter friend's ID">
+      <button id="connect">Connect</button>
+
+      <div class="video-container">
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+      </div>
+
+      <div class="call-container">
+        <button id="voiceCall">Voice Call</button>
+        <button id="videoCall">Video Call</button>
+        <button id="stopCall">Stop Call</button>
+      </div>
+
+      <div class="message-container">
+        <input type="text" id="messageInput" placeholder="Type message...">
+        <button id="send">Send</button>
+      </div>
+
+      <div id="messages-area"></div>
+    </div>
   </div>
 
-  <!-- Main Chat Screen -->
-  <div id="chatMainScreen" class="hidden">
-    <p>Your ID: <span id="myId"></span>
-      <button id="copy">Copy</button>
-      <button id="share">Share</button>
-    </p>
-
-    <input type="text" id="friendId" placeholder="Enter friend's ID">
-    <button id="connect">Connect</button>
-
-    <div class="video-container">
-      <video id="localVideo" autoplay muted></video>
-      <video id="remoteVideo" autoplay></video>
-    </div>
-
-    <div class="call-container">
-      <button id="voiceCall">Voice Call</button>
-      <button id="videoCall">Video Call</button>
-      <button id="stopCall">Stop Call</button>
-    </div>
-
-    <div class="message-container">
-      <input type="text" id="messageInput" placeholder="Type message...">
-      <button id="send">Send</button>
-    </div>
-
-    <div id="messages-area"></div>
-  </div>
-</div>
+  <script src="chat.js"></script> <!-- Link to JavaScript -->
+</body>
+</html>
