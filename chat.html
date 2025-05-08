@@ -1,27 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Interface</title>
-  <link rel="stylesheet" href="chat.css"> <!-- Link to CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechnoSaqib Chat</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    #tosModal {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+    .links {
+      margin: 8px 0;
+    }
+    .links a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      margin: 20px 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #chatInterface {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    #registrationScreen {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    #registrationScreen input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 50px;
+      border: 2px solid #ddd;
+    }
+    #chatMainScreen {
+      margin-top: 15px;
+    }
+    input, button {
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 50px;
+      border: 2px solid #ddd;
+    }
+    .video-container {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    #localVideo, #remoteVideo {
+      width: 120px;
+      height: 90px;
+      background: black;
+      border-radius: 10px;
+    }
+    .call-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+    .call-container button {
+      flex: 1;
+      margin: 0 5px;
+    }
+    .message-container {
+      display: flex;
+      gap: 10px;
+    }
+    .message-container input {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    #messages-area {
+      background: #f5f5f5;
+      border-radius: 10px;
+      padding: 10px;
+      height: 120px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+    .hidden {
+      display: none;
+    }
+    .message {
+      padding: 8px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+    .me {
+      background: #667eea;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+    }
+    .friend {
+      background: white;
+      border: 1px solid #ddd;
+    }
+    .info {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      text-align: center;
+      margin: 0 auto;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Your existing HTML code starts here -->
   <!-- Terms of Service Modal -->
   <div id="tosModal">
     <div class="modal-content">
       <h2>Please read and agree to our</h2>
       <div class="links">
-        <a href="#">Terms of Service</a> and
-        <a href="#">Privacy Policy</a>
+        <a href="https://technosaqib.github.io/chat(terms-of-service).txt">Terms of Service</a> and
+        <a href="https://technosaqib.github.io/chat(privacy-policy).txt">Privacy Policy</a>
       </div>
       <p>before using this website.</p>
-
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/NTMp05LyhC0" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/NTMp05LyhC0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-
       <div class="button-container">
         <button id="agree">I Agree</button>
         <button id="disagree">I Disagree</button>
@@ -32,43 +190,153 @@
   <!-- Chat Interface -->
   <div id="chatInterface" class="hidden">
     <h2>Welcome to Chat!</h2>
-
-    <!-- Registration Screen -->
     <div id="registrationScreen">
       <input type="text" id="username" placeholder="Enter your name">
       <button id="start">Start</button>
     </div>
-
-    <!-- Main Chat Screen -->
     <div id="chatMainScreen" class="hidden">
       <p>Your ID: <span id="myId"></span>
         <button id="copy">Copy</button>
         <button id="share">Share</button>
       </p>
-
       <input type="text" id="friendId" placeholder="Enter friend's ID">
       <button id="connect">Connect</button>
-
       <div class="video-container">
         <video id="localVideo" autoplay muted></video>
         <video id="remoteVideo" autoplay></video>
       </div>
-
       <div class="call-container">
         <button id="voiceCall">Voice Call</button>
         <button id="videoCall">Video Call</button>
         <button id="stopCall">Stop Call</button>
       </div>
-
       <div class="message-container">
         <input type="text" id="messageInput" placeholder="Type message...">
         <button id="send">Send</button>
       </div>
-
       <div id="messages-area"></div>
     </div>
   </div>
 
-  <script src="chat.js"></script> <!-- Link to JavaScript -->
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tosModal = document.getElementById('tosModal');
+      const chatInterface = document.getElementById('chatInterface');
+      const registrationScreen = document.getElementById('registrationScreen');
+      const chatMainScreen = document.getElementById('chatMainScreen');
+      const messagesArea = document.getElementById('messages-area');
+
+      // Check if Web Share API is supported
+      const isWebShareSupported = navigator.share !== undefined;
+
+      document.getElementById('agree').addEventListener('click', function () {
+        tosModal.style.display = 'none';
+        chatInterface.style.display = 'block';
+      });
+
+      document.getElementById('disagree').addEventListener('click', function () {
+        window.location.href = 'https://google.com';
+      });
+
+      document.getElementById('start').addEventListener('click', function () {
+        const username = document.getElementById('username').value;
+        if (!username) {
+          alert('Please enter your name');
+          return;
+        }
+        registrationScreen.style.display = 'none';
+        chatMainScreen.style.display = 'block';
+        document.getElementById('myId').textContent = username;
+        addMessage('info', 'Connected as ' + username);
+      });
+
+      // Copy button event listener
+      document.getElementById('copy').addEventListener('click', function() {
+        const myId = document.getElementById('myId').textContent;
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = myId;
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert('ID copied to clipboard!');
+      });
+
+      // Share button event listener
+      document.getElementById('share').addEventListener('click', function() {
+        const myId = document.getElementById('myId').textContent;
+        const shareText = `Connect with me on TechnoSaqib Chat! My ID is: ${myId}`;
+        
+        if (isWebShareSupported) {
+          navigator.share({
+            title: 'TechnoSaqib Chat',
+            text: shareText,
+          })
+          .catch(error => {
+            console.error('Error sharing:', error);
+            // Fallback if sharing fails
+            alert('Share your ID: ' + myId);
+          });
+        } else {
+          // Fallback for browsers that don't support Web Share API
+          alert('Share your ID: ' + myId);
+        }
+      });
+
+      document.getElementById('send').addEventListener('click', sendMessage);
+      document.getElementById('messageInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') sendMessage();
+      });
+
+      function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value.trim();
+        if (message) {
+          addMessage('me', message);
+          messageInput.value = '';
+        }
+      }
+
+      function addMessage(type, text) {
+        const message = document.createElement('div');
+        message.classList.add('message', type);
+        message.textContent = text;
+        messagesArea.appendChild(message);
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+      }
+
+      document.getElementById('connect').addEventListener('click', function () {
+        const friendId = document.getElementById('friendId').value;
+        if (friendId) {
+          addMessage('info', 'Connected to ' + friendId);
+        } else {
+          alert('Please enter a friend ID');
+        }
+      });
+
+      document.getElementById('voiceCall').addEventListener('click', function () {
+        const friendId = document.getElementById('friendId').value;
+        if (friendId) {
+          addMessage('info', 'Voice call started');
+        } else {
+          alert('Please enter a friend ID');
+        }
+      });
+
+      document.getElementById('videoCall').addEventListener('click', function () {
+        const friendId = document.getElementById('friendId').value;
+        if (friendId) {
+          addMessage('info', 'Video call started');
+        } else {
+          alert('Please enter a friend ID');
+        }
+      });
+
+      document.getElementById('stopCall').addEventListener('click', function () {
+        addMessage('info', 'Call ended');
+      });
+    });
+  </script>
 </body>
 </html>
