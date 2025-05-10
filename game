@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Play Deadshot.io - Game Zone</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #0f0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+    }
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      color: #0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      z-index: 1000;
+    }
+    #gameFrame {
+      width: 90%;
+      height: 800px;
+      border: 4px solid #0f0;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .controls {
+      margin: 10px;
+    }
+    .controls button {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    footer {
+      color: #888;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">Loading Deadshot.io...</div>
+
+  <h1>Welcome to TechnoSaqib's Game Zone</h1>
+
+  <div class="controls">
+    <button onclick="reloadGame()">Reload Game</button>
+    <button onclick="toggleFullscreen()">Fullscreen</button>
+    <button onclick="toggleMusic()">Mute/Unmute Music</button>
+  </div>
+
+  <iframe id="gameFrame" src="https://deadshot.io" onload="hideLoader()"></iframe>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mp3">
+    Your browser does not support audio.
+  </audio>
+
+  <footer>
+    Not affiliated with Deadshot.io. Game rights belong to its original creators.
+  </footer>
+
+  <script>
+    function hideLoader() {
+      document.getElementById('loader').style.display = 'none';
+    }
+
+    function reloadGame() {
+      document.getElementById('gameFrame').src = "https://deadshot.io";
+    }
+
+    function toggleFullscreen() {
+      const iframe = document.getElementById('gameFrame');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      }
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      music.muted = !music.muted;
+    }
+  </script>
+</body>
+</html>
