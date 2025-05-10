@@ -63,7 +63,7 @@
 
   <iframe id="gameFrame" src="https://deadshot.io" onload="hideLoader()"></iframe>
 
-  <audio id="bgMusic" autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mp3">
     Your browser does not support audio.
   </audio>
@@ -92,8 +92,22 @@
 
     function toggleMusic() {
       const music = document.getElementById('bgMusic');
-      music.muted = !music.muted;
+      if (music.paused) {
+        music.play();
+      } else {
+        music.muted = !music.muted;
+      }
     }
+
+    // Start music after first user click
+    document.addEventListener('click', () => {
+      const music = document.getElementById('bgMusic');
+      if (music.paused) {
+        music.play().catch(e => {
+          console.warn('Autoplay failed:', e);
+        });
+      }
+    }, { once: true });
   </script>
 </body>
 </html>
