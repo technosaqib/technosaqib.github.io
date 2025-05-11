@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html data-a11y-link-underlines=true lang="en" class="height-full" data-color-mode="light" data-light-theme="light">
+  <head>
+    <title>GitHub Student Developer Pack - GitHub Education</title>
+    <meta name="description" content="The GitHub Student Developer Pack is all you need to learn how to code. Get your Pack now.">
+    <meta itemprop="browser-errors-url" content="/api/javascript_errors">
+<meta itemprop="controller" content="pack">
+<meta itemprop="action" content="index">
+
+<script src="/assets/failbot-438019c7cf1642a975e657cdc872532c3d20d0436a30878d8242155e9e112878.js" crossorigin="anonymous" type="module" integrity="sha256-Q4AZx88WQql15lfNyHJTLD0g0ENqMIeNgkIVXp4RKHg="></script>
+
+
+    <link rel="stylesheet" crossorigin="anonymous" href="/assets/public-c9c170e58f617a2e7b3515c950464568547326ad8fbcca80da5eb69e5ad1fbb3.css" media="screen" integrity="sha256-ycFw5Y9hei57NRXJUEZFaFRzJq2PvMqA2l62nlrR+7M=" />
+    <link rel="stylesheet" crossorigin="anonymous" href="/assets/print-c77cbaad055a4a4ec18c62b22edc694070068615ee315f1afa26f8b906996c37.css" media="print" integrity="sha256-x3y6rQVaSk7BjGKyLtxpQHAGhhXuMV8a+ib4uQaZbDc=" />
+    <script src="/assets/public-a5a5587f64e9b1cbd89de6df6f13961d499d34f906e2fef6d315c2aa3da8b2c3.js" crossorigin="anonymous" integrity="sha256-paVYf2TpscvYnebfbxOWHUmdNPkG4v720xXCqj2ossM="></script>
+    <script src="/assets/skip_to_main-d9cc808460d7eec555e080662196aaf66fa025756ed9e09070eda4ad2c3641e9.js" crossorigin="anonymous" integrity="sha256-2cyAhGDX7sVV4IBmIZaq9m+gJXVu2eCQcO2krSw2Qek="></script>
+
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="6uz4t_eQLq8HxCbyv25punkMe6DczI-1A5MHrZn-p5VTtVQDEJO5HmtcNB4DWZwiXYfAx18lnZDt2UuDB0JO_g" />
+      <meta name="ha-url" content="https://collector.githubapp.com/education-web/collect">
+      <script src="https://analytics.githubassets.com/hydro-marketing.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+        <meta name="twitter:site" content="@GitHubEducation" /><meta name="twitter:site:id" content="1943578656" /><meta name="twitter:creator" content="@GitHubEducation" /><meta name="twitter:creator:id" content="1943578656" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="GitHub Student Developer Pack" /><meta name="twitter:description" content="The best developer tools, free for students. Get your GitHub Student Developer Pack now." /><meta name="twitter:image:src" content="https://education.github.com/assets/pack/twitter-summary-card-image-bec1d1f933d223919ff0576af8838cffe3975633b24641e9d7b1c4317066ae24.png" /><meta name="twitter:image:width" content="1120" /><meta name="twitter:image:height" content="600" />
+  <meta property="og:site_name" content="GitHub Education" /><meta property="og:author" content="https://www.facebook.com/GitHub" /><meta property="og:url" content="https://education.github.com/pack" /><meta property="og:type" content="object" /><meta property="og:image" content="https://education.github.com/assets/pack/opengraph-image-c6d692948bb5fbf237b8a72d6576b4dcc84586335b522a6036904fc16ec7eccd.png" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:title" content="GitHub Student Developer Pack" /><meta property="og:description" content="The best developer tools, free for students. Get your GitHub Student Developer Pack now." /><meta property="fb:app_id" content="1470168793264145" />
+
+  </head>
+  <body class="_pack _index d-flex flex-column height-full" >
+    <a href="#start-of-content" class="p-3 color-bg-accent-emphasis color-fg-on-emphasis show-on-focus js-skip-to-content">Skip to content</a>
+    <div class="flex-auto">
+
+
+      <header>
+        <div class="d-md-block py-2 color-bg-emphasis">
+  <div class="p-responsive d-flex flex-md-justify-between">
+    <a class="d-block color-fg-on-emphasis no-underline" href="https://github.com">GitHub.com</a>
+    
+  </div>
+</div>
+
+  <div class="py-4 color-bg-default border-bottom">
+    <div class="d-flex flex-column flex-lg-row flex-lg-items-center flex-lg-justify-between container-xl p-responsive flex-items-center">
+      <div class="f2-mktg">
+        <a class="color-fg-default" aria-label="Education homepage" href="/">
+          <svg class="octicon octicon-mark-github mr-2" fill="#000000" viewBox="0 0 16 16" width="31" height="31" version="1.1" aria-hidden="true"><path   d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>Education
+</a>      </div>
+
+      <nav class="mt-3 mt-md-0" aria-label="Global">
+        <ul class="d-flex flex-wrap flex-justify-center flex-items-center flex-md-justify-end list-style-none">
+          <li class="mb-2 mb-sm-3 mb-md-0">
+            <action-menu data-select-variant="none" data-view-component="true">
+  <focus-group direction="vertical" mnemonics retain>
+    <button id="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-button" popovertarget="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-overlay" aria-controls="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-list" aria-haspopup="true" type="button" data-view-component="true" class="Button--invisible Button--medium Button text-normal">  <span class="Button-content">
+    <span class="Button-label">Students</span>
+  </span>
+    <span class="Button-visual Button-trailingAction">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-triangle-down">
+    <path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"></path>
+</svg>
+    </span>
+</button>
+
+
+<anchored-position id="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-overlay" anchor="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-button" align="start" side="outside-bottom" anchor-offset="normal" popover="auto" data-view-component="true">
+  <div data-view-component="true" class="Overlay Overlay--size-auto">
+    
+      <div data-view-component="true" class="Overlay-body Overlay-body--paddingNone">          <action-list>
+  <div data-view-component="true">
+    <ul aria-labelledby="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-button" id="action-menu-bb6ce323-0eae-44bd-b697-79669eaf9a1c-list" role="menu" data-view-component="true" class="ActionListWrap--inset ActionListWrap">
+        <li data-targets="action-list.items" role="none" data-view-component="true" class="ActionListItem">
+    
+    
+    <a tabindex="-1" id="item-f636192a-b7f0-4675-850a-04d45e01195c" href="/students" role="menuitem" data-view-component="true" class="ActionListContent">
+      
+        <span data-view-component="true" class="ActionListItem-label">
+          Explore Student Programs
+</span></a>
+  
+</li>
+        <li role="presentation" aria-hidden="true" data-view-component="true" class="ActionList-sectionDivider"></li>
+        <li data-targets="action-list.items" role="none" data-view-component="true" class="ActionListItem">
+    
+    
+    <a tabindex="-1" id="item-85214a91-b870-4769-8954-ccce7322baff" href="/pack" role="menuitem" data-view-component="true" class="ActionListContent">
+      
+        <span data-view-component="true" class="ActionListItem-label">
+          Get Your Student Developer Pack
+</span></a>
+  
+</li>
+        <li role="presentation" aria-hidden="true" data-view-component="true" class="ActionList-sectionDivider"></li>
+        <li data-targets="action-list.items" role="none" data-view-component="true" class="ActionListItem">
+    
+    
+    <a tabindex="-1" id="item-e3c31fe4-723e-4ae5-b703-797986022101" href="/experts" role="menuitem" data-view-component="true" class="ActionListContent">
+      
+        <span data-view-component="true" class="ActionListItem-label">
+          Become a Campus Expert
+</span></a>
+  
+</li>
+</ul>    
+</div></action-list>
+
+
+</div>
+      
+</div></anchored-position>  </focus-group>
+</action-menu>          </li>
+          <li class="mb-2 mb-sm-3 mb-md-0">
+            <action-menu data-select-variant="none" data-view-component="true">
+  <focus-group direction="vertical" mnemonics retain>
+    <button id="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-button" popovertarget="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-overlay" aria-controls="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-list" aria-haspopup="true" type="button" data-view-component="true" class="Button--invisible Button--medium Button text-normal">  <span class="Button-content">
+    <span class="Button-label">Teachers</span>
+  </span>
+    <span class="Button-visual Button-trailingAction">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-triangle-down">
+    <path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z"></path>
+</svg>
+    </span>
+</button>
+
+
+<anchored-position id="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-overlay" anchor="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-button" align="start" side="outside-bottom" anchor-offset="normal" popover="auto" data-view-component="true">
+  <div data-view-component="true" class="Overlay Overlay--size-auto">
+    
+      <div data-view-component="true" class="Overlay-body Overlay-body--paddingNone">          <action-list>
+  <div data-view-component="true">
+    <ul aria-labelledby="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-button" id="action-menu-1fd1dfc8-e992-4cb5-81ec-0bacc76c2f73-list" role="menu" data-view-component="true" class="ActionListWrap--inset ActionListWrap">
+        <li data-targets="action-list.items" role="none" data-view-component="true" class="ActionListItem">
+    
+    
+    <a tabindex="-1" id="item-038cb316-d7ad-4450-ae53-8d46e51702eb" href="/teachers" role="menuitem" data-view-component="true" class="ActionListContent">
+      
+        <span data-view-component="true" class="ActionListItem-label">
+          Explore Teacher Programs
+</span></a>
+  
+</li>
+        <li role="presentation" aria-hidden="true" data-view-component="true" class="ActionList-sectionDivider"></li>
+        <li data-targets="action-list.items" role="none" data-view-component="true" class="ActionListItem">
+    
+    
+    <a tabindex="-1" id="item-d81eb0b6-1ff4-4ca9-8f81-e2b3333593c5" href="https://classroom.github.com" role="menuitem" data-view-component="true" class="ActionListContent">
+      
+        <span data-view-component="true" class="ActionListItem-label">
+          Learn About GitHub Classroom
+</span></a>
+  
+</li>
+</ul>    
+</div></action-list>
+
+
+</div>
+      
+</div></anchored-position>  </focus-group>
+</action-menu>          </li>
+          <li class="d-flex flex-items-center mx-3 mb-2 mb-sm-3 mb-md-0">
+            <a href="/schools" data-view-component="true" class="Link color-fg-default">Schools</a>
+          </li>
+
+          <li class="d-flex flex-items-center mx-3 mb-2 mb-sm-3 mb-md-0">
+            <a href="/events" data-view-component="true" class="Link color-fg-default">Events</a>
+          </li>
+
+
+          <li class="d-flex flex-items-center ml-1 mr-3 mb-2 mb-sm-3 mb-md-0">
+              <a href="/sign_in" data-view-component="true" class="Button--secondary Button--medium Button color-border-default">  <span class="Button-content">
+    <span class="Button-label">Sign in</span>
+  </span>
+</a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+        
+      </header>
+
+      <div id="start-of-content" class="show-on-focus"></div>
+        <main>
+          <script src="/assets/landing-page-1853255fe10cf8c833dfae2a969e199ca77647d1c81c4c0eecea7c9e8f0782d2.js" crossorigin="anonymous" integrity="sha256-GFMlX+EM+Mgz364qlp4ZnKd2R9HIHEwO7Op8no8HgtI="></script>
+<script src="/assets/pack-page-8f6e6a182604a199e81fa42b3983d5c4123d38c163b806af12673274a5bc0b66.js" crossorigin="anonymous" integrity="sha256-j25qGCYEoZnoH6QrOYPVxBI9OMFjuAavEmcydKW8C2Y="></script>
+
+  <script src="/assets/twitter-id-b3a536506c41ff94ad360625d2f02383617e98e32aacab1ee7bbb1ab4b0170dd.js" crossorigin="anonymous" integrity="sha256-s6U2UGxB/5StNgYl0vAjg2F+mOMqrKse57uxq0sBcN0="></script>
+
+
+
+
+<script src="/assets/social-media-1f3e98e429c792a59cdaa39c7878bd8e1541db64d44e5dde67e389ed08813f3b.js" crossorigin="anonymous" integrity="sha256-Hz6Y5CnHkqWc2qOceHi9jhVB22TUTl3eZ+OJ7QiBPzs="></script>
+
+<div class="tan-gradient">
+  <div class="container-xl pt-1 pt-md-6 pb-2 p-responsive pack-header-image">
+    <div class="d-flex flex-justify-between flex-items-center mb-4 mt-3">
+      <h1 class="f0-mktg lh-condensed text-left d-inline-block">GitHub Student Developer Pack</h1>
+    </div>
+    <p class="f3 mb-5 color-fg-default col-8">
+      <span class="text-bold">Learn to ship software like a pro.</span> There's no substitute for hands-on experience. But for most students, real world tools can be cost-prohibitive.
+      That's why we created the GitHub Student Developer Pack with some of our partners and friends.
+    </p>
+
+
+    <div class="mb-3">
+      <a href="https://github.com/settings/education/benefits" style="height: auto;" data-link-location="3" data-link-target-type="8" data-view-component="true" class="js-landing-page-link btn-large-mktg Button--primary Button--medium Button f4 text-normal">  <span class="Button-content">
+    <span class="Button-label">Sign up for Student Developer Pack</span>
+  </span>
+</a>
+
+
+      <div class="text-left mt-5">
+        <p class="f5 text-bold">Love the pack? Spread the word</p>
+        <div class="d-flex mt-3 flex-items-start">
+          <div class="d-inline-block twitter-share-button mr-2">
+            <a href="https://twitter.com/share" class="js-landing-page-link twitter-share-button v-hidden" data-text="The best developer tools, free for students:" data-url="https://education.github.com/pack" data-via="githubeducation" data-size="large" data-link-location="1" data-link-target-type="6">Tweet</a>
+          </div>
+
+          <div class="fb-like position-relative" data-href="https://education.github.com/pack" data-size="large" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+          <div id="fb-root"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-xl pt-1 pt-md-8 pb-6 p-responsive">
+  <h2 class="my-4 mt-md-0">Experiences</h2>
+
+<p style="max-width: 63.125rem" data-view-component="true" class="f4 mb-8">Discover the best ways to use pack offers with Experiences. Experiences are curated bundles of pack   partner products, GitHub tools, and other resources that are designed for you learn new skills and make the most   out of the Student Developer Pack and your journey in GitHub Education.</p>
+
+<div class="pack-offer-grid pack-offer-grid--experience-cards mb-4" >
+    
+<div class="border rounded-2 p-4">
+
+
+  <img alt="Blue, purple and green GitHub Copilot logo" class="width-fit mb-4" style="height: 75px" src="https://blobaccountproduction.blob.core.windows.net/educationwebblobstorage/wcqnijjurrjxj1to6bivp6thvw8w?sp=r&amp;sv=2018-11-09&amp;se=2025-05-11T13%3A15%3A38Z&amp;rscd=inline%3B+filename%3D%22Copilot+Glow+logo.png%22%3B+filename*%3DUTF-8%27%27Copilot%2520Glow%2520logo.png&amp;rsct=image%2Fpng&amp;sr=b&amp;sig=xtzknwyiF6iFTqMuARVsMkkzXjjZCfS9mR3yQM05LK8%3D" />
+
+  <hgroup role="group" aria-roledescription="Experience Group">
+      <p aria-roledescription="subtitle" data-view-component="true" class="color-fg-muted">LaunchPad</p>
+    <h3 class="mb-3">Intro to Copilot</h3>
+  </hgroup>
+
+  <p data-view-component="true" class="color-fg-muted mb-4">What is Copilot and how do you get started using it? Use this Experience as a Primer on Copilot. We share tutorials, guides and templates to learn how to use AI in your development process.</p>
+
+    <p class="text-normal f5 mb-3">Offers in this bundle</p>
+    <ul class="d-flex flex-wrap list-style-none pack__experiences__offers__wrapper pb-2">
+          <li class="Label--small d-flex flex-items-center" aria-label="GitHub" style="margin: 0px 0px;">
+            <span class="mr-2">
+              <img alt="" height="26" width="26" style="border-radius: 50%; border: 1px solid #E1E4E8" class="" src="/assets/pack/icon_github-3f2eb02545ca7c3e81beb0a464e85fb5340ec9d689133db563d1869350d6416c.png" />
+            </span>
+            GitHub
+          </li>
+          <li class="Label--small d-flex flex-items-center" aria-label="GitHub Copilot" style="margin: 0px 0px;">
+            <span class="mr-2">
+              <img alt="" height="26" width="26" style="border-radius: 50%; border: 1px solid #E1E4E8" class="" src="https://blobaccountproduction.blob.core.windows.net/educationwebblobstorage/jkvw7r03doo05xlfzdmytznxwhdv?sp=r&amp;sv=2018-11-09&amp;se=2025-05-11T13%3A15%3A38Z&amp;rscd=inline%3B+filename%3D%22copilot+b_w.png%22%3B+filename*%3DUTF-8%27%27copilot%2520b_w.png&amp;rsct=image%2Fpng&amp;sr=b&amp;sig=%2B%2Fq%2BJa3nCSHXfi8Af7BSvdjPH%2FrnoaHg2bV2iwZVliE%3D" />
+            </span>
+            GitHub Copilot
+          </li>
+          <li class="Label--small d-flex flex-items-center" aria-label="GitHub Codespaces" style="margin: 0px 0px;">
+            <span class="mr-2">
+              <img alt="" height="26" width="26" style="border-radius: 50%; border: 1px solid #E1E4E8" class="" src="/assets/pack/logo-github-codespaces-eb3a2e161fe5bce9f79532cba1b765f886924849709a90762005bd76ab2f96e0.jpg" />
+            </span>
+            GitHub Codespaces
+          </li>
+          <li class="Label--small d-flex flex-items-center" aria-label="Visual Studio Code" style="margin: 0px 0px;">
+            <span class="mr-2">
+              <img alt="" height="26" width="26" style="border-radius: 50%; border: 1px solid #E1E4E8" class="" src="/assets/pack/logo-student-vscode-58a8771230903732938f2ae22dccbd19541671f5b4d335b1d37f5104e8ee2d11.jpg" />
+            </span>
+            Visual Studio Code
+          </li>
+
+    </ul>
+
+
+  <a data-link-location="3" data-link-target-type="7" href="/experiences/intro_to_copilot" data-view-component="true" class="js-landing-page-link text-bold Link">
+    Learn more about Intro to Copilot
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-chevron-right">
+    <path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"></path>
+</svg>
+</a></div>
+
+    
+<div class="border rounded-2 p-4">
+
+
+  <img alt="black and white markdown logo" class="width-fit mb-4" style="height: 75px" src="https://blobaccountproduction.blob.core.windows.net/educationwebblobstorage/zagakuq0nu5ecihvcs1isnj5oyit?sp=r&amp;sv=2018-11-09&amp;se=2025-05-11T13%3A15%3A38Z&amp;rscd=inline%3B+filename%3D%22Markdown-mark.svg.png%22%3B+filename*%3DUTF-8%27%27Markdown-mark.svg.png&amp;rsct=image%2Fpng&amp;sr=b&amp;sig=AaZcnUkL6nf5fag5CWbEIrUMM%2FgK5qdo5J%2Fxmn4%2F0R4%3D" />
+
+  <hgroup role="group" aria-roledescription="Experience Group">
+      <p aria-roledescription="subtitle" data-view-component="true" class="color-fg-muted">LaunchPad</p>
+    <h3 class="mb-3">Understanding Markdown</h3>
+  </hgroup>
+
+  <p data-view-component="true" class="color-fg-muted mb-4">Markdown is a lightweight markup language for creat
