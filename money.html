@@ -3,29 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting to UPI</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Redirecting to UPI payment...</h3>
+
   <script>
-    window.onload = function () {
-      // Get amount from query string (e.g., ?₹100 or ?100)
+    function redirectToUPI() {
       let query = decodeURIComponent(window.location.search.substring(1));
-      let amount = query.replace(/[^\d.]/g, ''); // Remove ₹ and other non-numeric characters
+      let amount = query.replace(/[^\d.]/g, ''); // Clean amount (remove ₹, etc.)
 
-      // UPI base link
-      let upiLink = `upi://pay?pa=saqibsarwar003@okaxis&pn=Saqib%20Sarwar`;
+      let upiLink = `upi://pay?pa=saqibsarwar003@okaxis&pn=Saqib%20Sarwar&aid=uGICAgMDv7svDSw`;
 
-      // Append amount if present
       if (amount) {
         upiLink += `&am=${amount}`;
       }
 
-      // Append additional optional UPI parameters
-      upiLink += `&cu=INR&aid=uGICAgMDv7svDSw`;
+      upiLink += `&cu=INR`;
 
-      // Redirect
-      window.location.href = upiLink;
-    };
+      // Create and trigger an invisible iframe for UPI launch
+      let iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = upiLink;
+      document.body.appendChild(iframe);
+    }
+
+    // Wait 1 second before redirecting
+    setTimeout(redirectToUPI, 1000);
   </script>
-</head>
-<body>
-  <h3 style="text-align: center; margin-top: 50px;">Redirecting to UPI payment...</h3>
 </body>
 </html>
