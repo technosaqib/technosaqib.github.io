@@ -6,36 +6,31 @@
   <style>
     body {
       text-align: center;
-      font-family: Arial, sans-serif;
       padding-top: 50px;
+      font-family: Arial, sans-serif;
     }
   </style>
 </head>
 <body>
   <h3>Redirecting to UPI payment...</h3>
 
+  <a id="upiLink" style="display:none"></a>
+
   <script>
-    function redirectToUPI() {
-      let query = decodeURIComponent(window.location.search.substring(1));
-      let amount = query.replace(/[^\d.]/g, ''); // Clean amount (remove ₹, etc.)
+    function startRedirect() {
+      const query = decodeURIComponent(window.location.search.substring(1));
+      const amount = query.replace(/[^\d.]/g, '');
+      
+      let upi = `upi://pay?pa=saqibsarwar003@okaxis&pn=Saqib%20Sarwar&aid=uGICAgMDv7svDSw`;
+      if (amount) upi += `&am=${amount}`;
+      upi += `&cu=INR`;
 
-      let upiLink = `upi://pay?pa=saqibsarwar003@okaxis&pn=Saqib%20Sarwar&aid=uGICAgMDv7svDSw`;
-
-      if (amount) {
-        upiLink += `&am=${amount}`;
-      }
-
-      upiLink += `&cu=INR`;
-
-      // Create and trigger an invisible iframe for UPI launch
-      let iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = upiLink;
-      document.body.appendChild(iframe);
+      const link = document.getElementById('upiLink');
+      link.href = upi;
+      link.click(); // Simulate click
     }
 
-    // Wait 1 second before redirecting
-    setTimeout(redirectToUPI, 1000);
+    setTimeout(startRedirect, 1000); // slight delay helps bypass blockers
   </script>
 </body>
 </html>
