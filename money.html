@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting to UPI</title>
+  <title>UPI Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      text-align: center;
-      padding-top: 50px;
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-  <h3>Redirecting to UPI payment...</h3>
-
-  <a id="upiLink" style="display:none"></a>
+  <h2 id="payLabel">Loading...</h2>
+  <button id="payBtn" style="display:none;">Pay Now</button>
 
   <script>
-    function startRedirect() {
-      const query = decodeURIComponent(window.location.search.substring(1));
-      const amount = query.replace(/[^\d.]/g, '');
-      
-      let upi = `upi://pay?pa=saqibsarwar003@okaxis&pn=Saqib%20Sarwar&aid=uGICAgMDv7svDSw`;
-      if (amount) upi += `&am=${amount}`;
-      upi += `&cu=INR`;
+    const urlParams = new URLSearchParams(window.location.search);
+    const amount = urlParams.get("amount");
+    const upiID = "saqibsarwar003@oksbi";
 
-      const link = document.getElementById('upiLink');
-      link.href = upi;
-      link.click(); // Simulate click
+    if (amount) {
+      const label = document.getElementById("payLabel");
+      const button = document.getElementById("payBtn");
+      label.textContent = `Pay ₹${amount} Now`;
+      button.style.display = "inline-block";
+      button.onclick = function () {
+        const upiURL = `upi://pay?pa=${upiID}&pn=Saqib%20Sarwar&am=${amount}&cu=INR`;
+        window.location.href = upiURL;
+      };
+    } else {
+      document.getElementById("payLabel").textContent = "No amount specified in the URL.";
     }
-
-    setTimeout(startRedirect, 1000); // slight delay helps bypass blockers
   </script>
 </body>
 </html>
