@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quote Generator - Offline</title>
+<style>
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .container {
+    background: rgba(0,0,0,0.4);
+    padding: 30px 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    animation: fadeIn 1.5s ease;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+  }
+  h1 {
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  #quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 15px;
+    min-height: 80px;
+    animation: slideIn 1s ease forwards;
+  }
+  @keyframes slideIn {
+    from {opacity: 0; transform: translateX(-20px);}
+    to {opacity: 1; transform: translateX(0);}
+  }
+  #author {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: #ffda77;
+  }
+  button {
+    background: #ffda77;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin: 0 10px;
+  }
+  button:hover {
+    background: #fff;
+    transform: scale(1.05);
+  }
+  footer {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #ccc;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Random Quote Generator</h1>
+    <p id="quote">Loading...</p>
+    <p id="author">-</p>
+    <button id="newQuote">New Quote</button>
+    <button id="shareTweet">Share on Twitter</button>
+    <footer>Developed by Saqib Sarwar</footer>
+  </div>
+  <script>
+    const quotes = [
+      { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+      { text: "Life is 10% what happens to us and 90% how we react to it.", author: "Charles R. Swindoll" },
+      { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
+      { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
+      { text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde" },
+      { text: "Do not watch the clock. Do what it does. Keep going.", author: "Sam Levenson" },
+      { text: "Success usually comes to those who are too busy to be looking for it.", author: "Henry David Thoreau" },
+      { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
+      { text: "The best way to predict the future is to create it.", author: "Peter Drucker" }
+    ];
+
+    const quoteEl = document.getElementById('quote');
+    const authorEl = document.getElementById('author');
+    const newQuoteBtn = document.getElementById('newQuote');
+    const shareTweetBtn = document.getElementById('shareTweet');
+
+    function showRandomQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const quote = quotes[randomIndex];
+      quoteEl.textContent = `"${quote.text}"`;
+      authorEl.textContent = quote.author ? `- ${quote.author}` : "- Unknown";
+    }
+
+    newQuoteBtn.addEventListener('click', showRandomQuote);
+
+    shareTweetBtn.addEventListener('click', () => {
+      const tweetText = `${quoteEl.textContent} ${authorEl.textContent}`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+      window.open(twitterUrl, '_blank');
+    });
+
+    // Show a quote on page load
+    showRandomQuote();
+  </script>
+</body>
+</html>
