@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Image Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background-color: #4caf50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .image-container {
+      margin-top: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Image Generator</h1>
+    <input type="text" id="promptInput" placeholder="Enter an image prompt..." />
+    <button onclick="generateImage()">Generate Image</button>
+    <div class="image-container">
+      <img id="resultImage" src="" alt="Generated image will appear here" />
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4";
+    const API_TOKEN = "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"; // Your token
+
+    async function generateImage() {
+      const prompt = document.getElementById("promptInput").value;
+      if (!prompt) {
+        alert("Please enter a prompt.");
+        return;
+      }
+
+      document.getElementById("resultImage").src = "";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${API_TOKEN}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ inputs: prompt })
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          alert(`Error: ${response.status}\n${errorText}`);
+          return;
+        }
+
+        const blob = await response.blob();
+        const imageUrl = URL.createObjectURL(blob);
+        document.getElementById("resultImage").src = imageUrl;
+
+      } catch (err) {
+        alert("Unexpected error: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
